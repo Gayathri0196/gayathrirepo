@@ -1,339 +1,160 @@
 # RAG Retrieval Agent - LMS Validation
 
-A production-ready document question-answering system that ingests multiple PDF source documents, chunks them intelligently, embeds them using Azure OpenAI, stores them in a Chroma vector database, and answers batch or interactive questions with evidence-backed retrieval and reasoning.
+This project ingests validation PDFs, builds a Chroma vector store with Azure OpenAI embeddings, and answers questions through interactive chat or batch processing.
 
-> For detailed setup, branching strategy, and team workflow, see [CONTRIBUTING.md](CONTRIBUTING.md).
+For team workflow and contribution rules, see [CONTRIBUTING.md](CONTRIBUTING.md).
 
-## Quick Start (New Team Member)
+## What the project does
 
-```bash
-# 1. Clone the repo
-git clone <repository-url>
-cd project
+- Ingests one or more PDFs from `input_files/`
+- Splits content into structured chunks with metadata
+- Stores embeddings in a persistent Chroma vector database
+- Retrieves context with a hybrid semantic + lexical pipeline
+- Generates evidence-based answers with Azure OpenAI
+- Tracks input tokens, output tokens, and estimated API cost
 
-# 2. Create & activate virtual environment
-python -m venv .venv
-.\.venv\Scripts\Activate.ps1        # Windows
-# source .venv/bin/activate          # macOS/Linux
+## Repository layout
 
-# 3. Install dependencies
-pip install -r requirements.txt
-
-# 4. Set up credentials
-copy .env.example .env              # Windows
-# cp .env.example .env              # macOS/Linux
-# Edit .env with your Azure OpenAI credentials
-
-# 5. Add your PDFs to input file/ folder, then ingest
-cd src
-python -B app.py ingest
-
-# 6. Start chatting
-python -B app.py chat
-```
-
-## Project Overview
-
-This project enables:
-- **Multi-source ingestion**: Process all PDFs in `input file/` folder automatically.
-- **Intelligent chunking**: Dynamically detect document structure (headings, sections, domains).
-- **Hybrid retrieval**: Combine semantic search, lexical matching, and ranking fusion.
-- **Evidence-based answers**: Ground all responses in source document text with citations.
-- **Azure OpenAI integration**: Use enterprise-grade embeddings + GPT models for quality.
-
-## Architecture
-
-```
-┌─────────────────────┐
-│  Input PDFs         │
-│ (input file/)       │
-└──────────┬──────────┘
-           │
-           ▼
-┌─────────────────────────────────────┐
-│  Ingestion + Chunking               │
-│  (ingestion.py)                     │
-│  - Extract text from PDFs           │
-│  - Auto-detect headings             │
-│  - Create domain-aware chunks       │
-└──────────┬──────────────────────────┘
-           │
-           ▼
-┌─────────────────────────────────────┐
-│  Embeddings + Vector Store          │
-│  (embeddings.py, vector_store.py)   │
-│  - Azure OpenAI text-embedding-3    │
-│  - Chroma persistent storage        │
-└──────────┬──────────────────────────┘
-           │
-           ▼
-┌─────────────────────────────────────┐
-│  Query Processing                   │
-│  (retriever.py)                     │
-│  - Hybrid retrieval (semantic +     │
-│    lexical + RRF + MMR + neighbors) │
-└──────────┬──────────────────────────┘
-           │
-           ▼
-┌─────────────────────────────────────┐
-│  Answer Generation                  │
-│  (qa_chain.py, batch_questions.py)  │
-│  - Optional LLM reranking           │
-│  - Azure OpenAI GPT answer          │
-│  - Evidence + source citation       │
-└──────────┬──────────────────────────┘
-           │
-           ▼
-┌─────────────────────┐
-│  Outputs            │
-│ (output file/)      │
-│ - batch_answers.txt │
-│ - fetched_q's.txt   │
-└─────────────────────┘
-```
-
-## Folder Structure
-
-```
-project/
-├── .env                      # Azure OpenAI credentials + config
-├── .gitignore                # Git ignore (pycache, .venv, etc.)
-├── requirements.txt          # Python dependencies
-├── README.md                 # This file
-│
-├── src/                      # Source code (entry points + modules)
-│   ├── __init__.py
-│   ├── app.py                # CLI entry point (ingest/chat/batch)
-│   ├── ingestion.py          # Multi-source PDF ingestion & chunking
-│   ├── embeddings.py         # Azure OpenAI embeddings wrapper
-│   ├── vector_store.py       # Chroma vector DB setup
+```text
+gayathrirepo/
+├── README.md
+├── CONTRIBUTING.md
+├── requirements.txt
+├── .env.example
+├── src/
+│   ├── app.py                # CLI entry point
+│   ├── ingestion.py          # PDF parsing and chunk creation
+│   ├── embeddings.py         # Azure embedding client + tracking
+│   ├── vector_store.py       # Chroma build/load helpers
 │   ├── retriever.py          # Hybrid retrieval pipeline
-│   ├── qa_chain.py           # LLM + QA + reranking logic
-│   ├── batch_questions.py    # Batch Q&A processing
-│   └── fallback.py           # No-context fallback responses
-│
-├── data/                     # Generated data (not in git)
-│   ├── processed_docs/
-│   │   └── chunks.json       # Cached extracted chunks
-│   ├── vectordb/             # Chroma persistent DB
-│   │   └── (UUID folders + chroma.sqlite3)
-│   └── raw_docs/             # (Placeholder for future use)
-│
-├── input file/               # Source PDFs for ingestion
-│   └── LMS Test Plan Sample.pdf
-│
-├── output file/              # Generated Q&A outputs
-│   ├── batch_answers.txt     # Answers from batch mode
-│   └── fetched_questions.txt # Extracted questions list
-│
-└── logs/                     # Runtime logs (not in git)
-    ├── app.log               # Application logs
-    └── ingestion.log         # Ingestion-specific logs
+│   ├── qa_chain.py           # Answering and reranking logic
+│   ├── batch_questions.py    # Batch question extraction/answering
+│   ├── fallback.py           # No-context fallback response
+│   └── token_tracker.py      # Token and cost tracking
+├── input_files/              # Source PDFs for ingestion
+├── output_files/             # Batch inputs/outputs
+├── data/                     # Generated chunks and vector DB
+└── logs/                     # Runtime logs and token usage logs
 ```
 
-## Setup & Installation
+## Setup
 
-### 1. Prerequisites
+### Prerequisites
+
 - Python 3.10+
-- Azure OpenAI account with GPT + embedding model deployments
+- Azure OpenAI deployment for chat
+- Azure OpenAI deployment for embeddings
 
-### 2. Clone & Install
+### Install
 
-```bash
-cd c:\Users\M.Devi\Desktop\project
-
-# Create & activate virtual environment
+```powershell
+cd C:\Users\M.Devi\Desktop\gayathrirepo
 python -m venv .venv
 .\.venv\Scripts\Activate.ps1
-
-# Install dependencies (versions auto-resolved)
 pip install --upgrade pip
 pip install -r requirements.txt
 ```
 
-### 3. Configure `.env`
+### Configure environment
 
-Create/update `.env` in project root:
-```
+Copy `.env.example` to `.env` and set these values:
+
+```env
 AZURE_OPENAI_ENDPOINT=https://your-instance.openai.azure.com/
 AZURE_OPENAI_API_VERSION=2025-04-01-preview
 AZURE_OPENAI_API_KEY=your-api-key
-AZURE_OPENAI_DEPLOYMENT_NAME=gpt-35-turbo  # or your GPT deployment
+AZURE_OPENAI_DEPLOYMENT_NAME=gpt-5.1
 AZURE_OPENAI_EMBEDDING_DEPLOYMENT=text-embedding-3-large
+
+AZURE_CHAT_INPUT_COST_PER_1K=0.00125
+AZURE_CHAT_OUTPUT_COST_PER_1K=0.011
+AZURE_EMBEDDING_INPUT_COST_PER_1K=0.00125
 ```
 
-## Usage
+## Run the project
 
-### From project root, use these commands:
+Run commands from the `src/` directory.
 
-#### 1. Ingest Source Documents
-Scan all PDFs in `input file/`, chunk them, and build vector DB.
+### Ingest source PDFs
 
-```bash
+```powershell
 cd src
 ..\.venv\Scripts\python.exe -B app.py ingest
 ```
 
-**What it does:**
-- Finds all `.pdf` files in `input file/`
-- Extracts text page-by-page
-- Auto-detects headings & section structure
-- Creates intelligent chunks with metadata
-- Embeds chunks with Azure OpenAI
-- Stores in Chroma vector DB (`data/vectordb/`)
+Use this when:
+- you set up the project for the first time
+- you add or replace PDFs in `input_files/`
+- you want to rebuild the vector database
 
-**Run this:**
-- Once after setup
-- Whenever source PDFs change
-- After adding new PDFs to `input file/`
+### Interactive chat
 
-#### 2. Interactive Chat Mode
-Ask questions interactively; get answers grounded in documents.
-
-```bash
+```powershell
 cd src
 ..\.venv\Scripts\python.exe -B app.py chat
 ```
 
-**Example interaction:**
-```
-You: Who will execute the System Test?
-Agent: The System Testing will be executed by Team A.
+### Batch question answering
 
-  Sources:
-    - [2.1] System Testing Approach (pages 5-5)
-    - [10.0] Roles and Responsibilities (pages 9-10)
-```
-
-**Type:**
-- `quit`, `exit`, or `q` to exit
-
-#### 3. Batch Mode (Answer Questions from PDF)
-Extract and answer all questions from a PDF file.
-
-```bash
+```powershell
 cd src
-..\.venv\Scripts\python.exe -B app.py batch "..\input file\Your_Questions.pdf"
+..\.venv\Scripts\python.exe -B app.py batch
 ```
 
-**Output:**
-- [output file/batch_answers.txt](output%20file) — Answers with evidence
-- [output file/fetched_questions.txt](output%20file) — Extracted question list
+Or provide a different question PDF:
 
-## Key Features
-
-### Multi-Source Ingestion
-- Automatically discovers and processes all PDFs in `input file/`
-- Maintains source document attribution in chunk metadata
-- Handles naming collisions across files with unique section IDs
-
-### Intelligent Chunking
-- **Dynamic heading detection**: Identifies section structure per document (numbered, lettered, ALL CAPS)
-- **Smart merging**: Combines tiny chunks into neighbors
-- **Smart splitting**: Breaks oversized chunks at paragraph boundaries with overlap
-- **Domain derivation**: Auto-labels sections by semantic topic
-
-### Hybrid Retrieval
-- **Semantic**: Vector similarity from embeddings
-- **Lexical**: Keyword matching across chunks
-- **Reciprocal Rank Fusion (RRF)**: Combines both rankings
-- **Max Marginal Relevance (MMR)**: Diversifies results
-- **Neighbor linking**: Expands context to related sections
-
-### LLM-Based Reranking
-- Optional second-pass ranking using Azure OpenAI
-- Scores passage relevance directly to question
-- Combines with semantic scores for final ranking
-
-### Evidence-Based Answers
-- Answers grounded only in retrieved documents
-- "I don't know..." fallback if no relevant text
-- Auto-formatting for yes/no, checkbox, and descriptive questions
-- Citation of source sections with page numbers
-
-## Configuration
-
-### Chunking Parameters (src/ingestion.py)
-```python
-MIN_CHUNK_CHARS = 80           # Merge if smaller
-MAX_CHUNK_CHARS = 3000         # Split if larger
-OVERLAP_CHARS = 150            # Overlap in splits
+```powershell
+cd src
+..\.venv\Scripts\python.exe -B app.py batch "..\output_files\Your Questions.pdf"
 ```
 
-### Retrieval Parameters (src/retriever.py)
-```python
-SIMILARITY_THRESHOLD = 0.2     # Minimum semantic score
-TOP_K = 8                      # Chunks to retrieve
-```
+Batch outputs are written to:
+- `output_files/batch_answers.txt`
+- `output_files/fetched_questions.txt`
 
-### LLM Parameters (src/qa_chain.py)
-- Temperature: 0.0 (deterministic)
-- Max tokens: 1024
-- Strict prompt enforces evidence-based answers
+## API token and cost tracking
 
-## Dependencies
+The project records usage for:
+- embedding calls
+- reranking calls
+- final answer generation calls
 
-See [requirements.txt](requirements.txt):
-- **LangChain**: Orchestration & chains
-- **Azure OpenAI**: Embeddings + GPT
-- **Chroma**: Vector database
-- **PyMuPDF**: PDF text extraction
-- **spaCy**: Sentence segmentation
-- **python-dotenv**: .env loading
+Tracked details:
+- input tokens
+- output tokens
+- total tokens
+- overall total cost in USD
+
+Where to find them:
+- `logs/token_usage.jsonl` for per-call records
+- `logs/app.log` for runtime `USAGE | ...` entries
+- terminal summary after `ingest`, `chat`, and `batch`
+
+## Main components
+
+- `src/ingestion.py`: extracts and chunks source PDFs
+- `src/vector_store.py`: creates and loads the Chroma database
+- `src/retriever.py`: performs hybrid retrieval and section expansion
+- `src/qa_chain.py`: reranks passages and generates answers
+- `src/batch_questions.py`: extracts batch questions and writes answers
+- `src/token_tracker.py`: accumulates token and cost usage across calls
 
 ## Troubleshooting
 
-### "No PDF source files found"
-**Cause:** `input file/` folder is empty or no `.pdf` files  
-**Fix:** Add at least one `.pdf` to `input file/` and rerun `ingest`
+### No PDF source files found
 
-### "Azure OpenAI credentials not set"
-**Cause:** `.env` file missing or incomplete  
-**Fix:** Copy `.env` template, fill in real credentials
+Cause: `input_files/` does not contain any PDFs.
 
-### Slow ingestion on first run
-**Cause:** Azure embeddings model download (~80MB)  
-**Fix:** Normal on first run; subsequent ingests are faster
+Fix: Add at least one PDF and run ingest again.
 
-### Dependency conflicts
-**Cause:** Incompatible package versions  
-**Fix:** Delete `.venv/`, reinstall with `pip install -r requirements.txt`
+### Azure OpenAI configuration not complete
 
-## Performance Notes
+Cause: `.env` is missing required values.
 
-- **Ingestion**: ~30 seconds for typical 10-page document (includes embedding download on first run)
-- **Chat/Batch**: ~2-5 seconds per question (Azure OpenAI latency)
-- **Vector DB**: Persistent; reuse across runs after first ingest
+Fix: Fill in `AZURE_OPENAI_ENDPOINT`, `AZURE_OPENAI_API_KEY`, `AZURE_OPENAI_API_VERSION`, `AZURE_OPENAI_DEPLOYMENT_NAME`, and `AZURE_OPENAI_EMBEDDING_DEPLOYMENT`.
 
-## Example Workflow
+### Batch answers or token logs look stale
 
-```bash
-# 1. Setup (one-time)
-python -m venv .venv
-.\.venv\Scripts\Activate.ps1
-pip install -r requirements.txt
+Cause: files in `output_files/` and `logs/` are generated artifacts from previous runs.
 
-# 2. Add your source PDF(s)
-# Copy files to: input file/
-
-# 3. Ingest
-cd src
-..\.venv\Scripts\python.exe -B app.py ingest
-
-# 4. Chat or batch
-..\.venv\Scripts\python.exe -B app.py chat           # Interactive
-# OR
-..\.venv\Scripts\python.exe -B app.py batch          # Batch mode
-```
-
-## License & Attribution
-
-This project uses:
-- Azure OpenAI (Microsoft)
-- LangChain (LangChain Inc.)
-- Chroma (Chroma Inc.)
-- PyMuPDF (Artifex Software)
-
-## Questions?
-
-Review logs in `logs/` for debug details. Check source code docstrings for component-level documentation.
+Fix: rerun the command, or clear those generated files if you want a fresh run history.

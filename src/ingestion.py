@@ -5,7 +5,7 @@ Reads any PDF and dynamically creates chunks based on the actual
 content structure found in that specific file.
 
 Nothing is hardcoded to a particular document -- headings, domains,
-and chunk counts are all derived from the input file itself.
+and chunk counts are all derived from the input PDF itself.
 
 Chunking strategy:
   1. Auto-detect heading style from the document content
@@ -26,8 +26,8 @@ logger = logging.getLogger(__name__)
 # -- Configuration -------------------------------------------------------------
 
 # Source inputs
-SOURCE_DIR = os.path.join("..", "input file")
-SOURCE_PDF = os.path.join(SOURCE_DIR, "LMS Test Plan Sample.pdf")
+SOURCE_DIR = os.path.join("..", "input_files")
+SOURCE_PDF = os.path.join(SOURCE_DIR, "lms_test_plan_sample.pdf")
 
 # Output path for cached processed chunks
 PROCESSED_DIR = os.path.join("..", "data", "processed_docs")

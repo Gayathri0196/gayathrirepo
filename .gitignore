@@ -30,13 +30,13 @@ data/raw_docs/*.pdf
 logs/
 
 # Input PDFs - team members add their own locally
-input file/*.pdf
+input_files/*.pdf
 
 # Output files - generated per run, not tracked
-output file/batch_answers.txt
-output file/fetched_questions.txt
-output file/question_template.txt
-output file/*.pdf
+output_files/batch_answers.txt
+output_files/fetched_questions.txt
+output_files/question_template.txt
+output_files/*.pdf
 
 # OS noise
 Thumbs.db

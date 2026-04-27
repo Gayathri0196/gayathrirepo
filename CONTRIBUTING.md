@@ -84,7 +84,7 @@ Then edit `.env` with your Azure OpenAI endpoint, API key, and deployment names.
 **Never commit your `.env` file.** It is already in `.gitignore`.
 
 ### 5. Add Input Documents
-Place your PDF files in the `input file/` folder.  
+Place your PDF files in the `input_files/` folder.  
 This folder is ignored by git — each team member manages their own local PDFs.
 
 ### 6. Run the Pipeline
@@ -115,8 +115,8 @@ project/
 │   ├── qa_chain.py          # LLM answer generation
 │   ├── batch_questions.py   # Batch Q&A pipeline
 │   └── fallback.py          # No-context fallback responses
-├── input file/              # Place source PDFs here (git-ignored)
-├── output file/             # Generated answers (git-ignored)
+├── input_files/             # Place source PDFs here (git-ignored)
+├── output_files/            # Generated answers (git-ignored)
 ├── data/                    # Vector DB and chunk cache (git-ignored)
 ├── logs/                    # Runtime logs (git-ignored)
 ├── requirements.txt         # Python dependencies
@@ -179,7 +179,7 @@ Types: `feat`, `fix`, `docs`, `refactor`, `test`, `chore`
 
 ## Important Rules
 - **Do not commit `.env`** — contains secrets.
-- **Do not commit PDFs** in `input file/` or `output file/`.
+- **Do not commit PDFs** in `input_files/` or `output_files/`.
 - **Do not commit `data/vectordb/`** — it is large and rebuild-able.
 - Always run `python -B app.py ingest` after pulling changes to rebuild the vector DB.
 - Use Python 3.10+ for compatibility.

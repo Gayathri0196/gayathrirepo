@@ -20,7 +20,6 @@ import os
 import sys
 import io
 import logging
-from datetime import datetime
 
 # Ensure we run from src/ directory
 os.chdir(os.path.dirname(os.path.abspath(__file__)))
@@ -50,7 +49,7 @@ from dotenv import load_dotenv
 load_dotenv(os.path.join("..", ".env"))
 
 from ingestion import ingest
-from vector_store import build_vector_store, load_vector_store
+from vector_store import build_vector_store
 from retriever import retrieve_with_scores
 from qa_chain import get_qa_chain, rerank_documents, answer_with_context
 from fallback import check_fallback, get_fallback_response
@@ -58,6 +57,7 @@ from batch_questions import (
     answer_questions_from_pdf,
     DEFAULT_QUESTION_PDF,
 )
+from token_tracker import format_usage_summary, get_usage_summary
 
 # -- Colors for terminal output ------------------------------------------------
 
@@ -68,6 +68,18 @@ class C:
     RED = "\033[91m"
     BOLD = "\033[1m"
     RESET = "\033[0m"
+
+
+def _print_usage_summary() -> None:
+    """Print session token/cost summary if any OpenAI calls were made."""
+    summary = get_usage_summary()
+    if summary.get("calls", 0) <= 0:
+        return
+
+    print(f"\n{C.BOLD}{'-' * 65}{C.RESET}")
+    print(f"{C.BOLD}{C.CYAN}  API TOKEN USAGE SUMMARY{C.RESET}")
+    print(format_usage_summary())
+    print(f"{C.BOLD}{'-' * 65}{C.RESET}\n")
 
 
 # ==============================================================================
@@ -113,6 +125,7 @@ def run_ingest():
         count = sum(1 for c in chunks if c["domain"] == d)
         print(f"    - {d} ({count} chunks)")
     print(f"\n{C.BOLD}{'=' * 65}{C.RESET}")
+    _print_usage_summary()
     print(f"\n  Next: Run {C.CYAN}python app.py chat{C.RESET} to start asking questions.\n")
 
 
@@ -227,6 +240,8 @@ def run_chat():
             logger.error(f"Error: {e}", exc_info=True)
             print(f"\n{C.RED}Error: {e}{C.RESET}")
 
+    _print_usage_summary()
+
 
 # ==============================================================================
 # MODE 3: BATCH -- Answer Questions Extracted From a PDF
@@ -257,6 +272,7 @@ def run_batch(question_pdf_path: str = DEFAULT_QUESTION_PDF, limit: int = 0):
 
     print(f"\n{C.GREEN}  [OK] Answered {count} questions{C.RESET}")
     print(f"  Output: {out_path}")
+    _print_usage_summary()
     print(f"\n{C.BOLD}{'=' * 65}{C.RESET}\n")
 
 

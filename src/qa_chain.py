@@ -25,6 +25,7 @@ from langchain_core.prompts import PromptTemplate
 from openai import APIError, RateLimitError
 
 from retriever import get_retriever, retrieve_with_scores
+from token_tracker import record_usage
 
 logger = logging.getLogger(__name__)
 
@@ -148,6 +149,7 @@ def _azure_completion(
     messages: list,
     max_tokens: int = 700,
     temperature: float = 0.0,
+    operation: str = "chat_completion",
 ) -> str:
     """Call Azure OpenAI and return response text."""
     try:
@@ -156,6 +158,33 @@ def _azure_completion(
         # Convert to LangChain message format
         content = messages[0]["content"] if messages else ""
         response = llm.invoke([HumanMessage(content=content)])
+
+        usage_meta = getattr(response, "usage_metadata", {}) or {}
+        response_meta = getattr(response, "response_metadata", {}) or {}
+        token_usage = response_meta.get("token_usage", {}) or {}
+
+        input_tokens = (
+            usage_meta.get("input_tokens")
+            or usage_meta.get("prompt_tokens")
+            or token_usage.get("prompt_tokens")
+            or token_usage.get("input_tokens")
+            or 0
+        )
+        output_tokens = (
+            usage_meta.get("output_tokens")
+            or usage_meta.get("completion_tokens")
+            or token_usage.get("completion_tokens")
+            or token_usage.get("output_tokens")
+            or 0
+        )
+        model_name = response_meta.get("model_name") or AZURE_DEPLOYMENT
+
+        record_usage(
+            operation=operation,
+            model=model_name,
+            input_tokens=input_tokens,
+            output_tokens=output_tokens,
+        )
         return response.content or ""
     except RateLimitError as e:
         logger.warning(f"Azure OpenAI rate limit: {e}")
@@ -579,6 +608,7 @@ def rerank_documents(llm: AzureChatOpenAI, question: str, docs_with_scores: list
                 messages=[{"role": "user", "content": prompt}],
                 max_tokens=5,
                 temperature=0.0,
+                operation="rerank_completion",
             )
             match = re.search(r"\d+", score_text)
             llm_score = int(match.group()) if match else 5
@@ -640,6 +670,7 @@ def answer_with_context(llm: AzureChatOpenAI, question: str, docs: list) -> str:
             messages=[{"role": "user", "content": prompt}],
             max_tokens=700,
             temperature=0.0,
+            operation="answer_completion",
         )
         return (response or "").strip()
     except RateLimitError:

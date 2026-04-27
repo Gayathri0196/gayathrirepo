@@ -12,7 +12,6 @@ import os
 import re
 import logging
 import shutil
-import tempfile
 from typing import List, Tuple, Optional
 
 import spacy
@@ -23,10 +22,9 @@ from fallback import check_fallback, get_fallback_response
 
 logger = logging.getLogger(__name__)
 
-DEFAULT_QUESTION_PDF = os.path.join("..", "output file", "LMS Validation Plan Sample.pdf")
-DEFAULT_OUT_TXT = os.path.join("..", "output file", "batch_answers.txt")
-DEFAULT_QUESTION_TEMPLATE_TXT = os.path.join("..", "output file", "LMS Validation Plan Sample.pdf")
-DEFAULT_FETCHED_QUESTIONS_TXT = os.path.join("..", "output file", "fetched_questions.txt")
+DEFAULT_QUESTION_PDF = os.path.join("..", "output_files", "lms_validation_plan_sample.pdf")
+DEFAULT_OUT_TXT = os.path.join("..", "output_files", "batch_answers.txt")
+DEFAULT_FETCHED_QUESTIONS_TXT = os.path.join("..", "output_files", "fetched_questions.txt")
 
 
 def _read_file_text_with_docling(file_path: str) -> str:
@@ -98,16 +96,9 @@ def _read_file_text_with_docling(file_path: str) -> str:
     return str(doc)
 
 
-def _read_text_lines(template_path: str) -> List[str]:
-    if not os.path.exists(template_path):
-        raise FileNotFoundError(f"Question template file not found: {template_path}")
-
-    with open(template_path, "r", encoding="utf-8") as f:
-        return [ln.rstrip("\n") for ln in f.readlines()]
-
-
 # Lazy-loaded spaCy model (loaded once on first use)
 _NLP = None
+
 
 def _get_nlp():
     global _NLP
@@ -234,41 +225,6 @@ def extract_questions_from_pdf(pdf_path: str) -> List[str]:
     return _extract_questions_from_text(raw_text, os.path.basename(pdf_path))
 
 
-def extract_questions_from_template(template_path: str) -> List[str]:
-    """
-    Extract questions from a text template file using spaCy sentence segmentation.
-
-    Handles all common template formats:
-      - Q1: / Q2: / Question 1: prefixed lines
-      - Plain numbered lines: 1. / 2) style
-      - Plain lines ending with '?'
-      - Multi-sentence paragraphs (each sentence evaluated independently)
-      - Answer lines (A1: / Answer:) are skipped automatically
-    """
-    if not os.path.exists(template_path):
-        raise FileNotFoundError(f"Question template file not found: {template_path}")
-
-    # Mandatory Docling extraction for all supported uploaded output files.
-    ext = os.path.splitext(template_path)[1].lower()
-    if ext == ".txt":
-        with open(template_path, "r", encoding="utf-8") as f:
-            txt_content = f.read()
-        with tempfile.NamedTemporaryFile(mode="w", suffix=".md", delete=False, encoding="utf-8") as tmp:
-            tmp.write(txt_content)
-            tmp_path = tmp.name
-        try:
-            raw_text = _read_file_text_with_docling(tmp_path)
-        finally:
-            try:
-                os.unlink(tmp_path)
-            except OSError:
-                pass
-    else:
-        raw_text = _read_file_text_with_docling(template_path)
-
-    return _extract_questions_from_text(raw_text, os.path.basename(template_path))
-
-
 def _answer_questions(questions: List[str], out_txt_path: str, limit: Optional[int] = None) -> Tuple[str, int]:
     if limit is not None and limit > 0:
         questions = questions[:limit]
@@ -347,32 +303,4 @@ def answer_questions_from_pdf(
     _save_fetched_questions(questions, fetched_questions_path)
     out_path, count = _answer_questions(questions, out_txt_path, limit=None)
     logger.info("Answered %d questions from %s", count, os.path.basename(pdf_path))
-    return out_path, count
-
-
-def answer_questions_from_template(
-    template_path: str = DEFAULT_QUESTION_TEMPLATE_TXT,
-    out_txt_path: Optional[str] = DEFAULT_OUT_TXT,
-    fetched_questions_path: str = DEFAULT_FETCHED_QUESTIONS_TXT,
-    limit: Optional[int] = None,
-) -> Tuple[str, int]:
-    """
-    Extract all questions from a template text file and answer them using the
-    retrieval pipeline.
-
-    Writes answers to batch output file by default.
-    """
-    questions = extract_questions_from_template(template_path)
-    if not questions:
-        raise ValueError(
-            "No questions were found in template file. Add question lines ending with '?' "
-            "or prefixed with Q1:, Q2:, ..."
-        )
-
-    if limit is not None and limit > 0:
-        questions = questions[:limit]
-
-    _save_fetched_questions(questions, fetched_questions_path)
-    out_path, count = _answer_questions(questions, out_txt_path, limit=None)
-    logger.info("Answered %d questions from template %s", count, os.path.basename(template_path))
     return out_path, count
