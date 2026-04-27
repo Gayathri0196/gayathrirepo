@@ -1,0 +1,22 @@
+# Core LangChain
+langchain
+langchain-community
+langchain-core
+langchain-openai
+openai
+
+# PDF Parsing
+PyMuPDF
+pdfplumber
+docling
+
+# NLP for chunking and question extraction
+spacy
+en-core-web-sm @ https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-3.8.0/en_core_web_sm-3.8.0-py3-none-any.whl
+
+# Embeddings & Vector Store
+chromadb
+langchain-chroma
+
+# Utilities
+python-dotenv

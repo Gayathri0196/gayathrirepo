@@ -1,0 +1,47 @@
+# Python bytecode & cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# Virtual environment
+.venv/
+venv/
+env/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Environment & secrets
+.env
+.env.local
+
+# Generated data (large, rebuild-able)
+data/vectordb/
+data/processed_docs/chunks.json
+data/processed_docs/
+data/raw_docs/*.pdf
+logs/
+
+# Input PDFs - team members add their own locally
+input file/*.pdf
+
+# Output files - generated per run, not tracked
+output file/batch_answers.txt
+output file/fetched_questions.txt
+output file/question_template.txt
+output file/*.pdf
+
+# OS noise
+Thumbs.db
+*.tmp
+
+# IDE/Editor
+*.pyc
+.pylintrc
