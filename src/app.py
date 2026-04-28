@@ -50,7 +50,7 @@ load_dotenv(os.path.join("..", ".env"))
 
 from ingestion import ingest
 from vector_store import build_vector_store
-from retriever import retrieve_with_scores
+from retriever import retrieve_with_scores, enhance_with_image_context
 from qa_chain import get_qa_chain, rerank_documents, answer_with_context
 from fallback import check_fallback, get_fallback_response
 from batch_questions import (
@@ -169,6 +169,9 @@ def run_chat():
 
             # Step 1: Retrieve relevant chunks with scores
             results = retrieve_with_scores(question)
+            
+            # Step 1.5: Enhance with image context
+            results = enhance_with_image_context(results)
 
             # Step 2: Check fallback
             docs = [doc for doc, score in results]

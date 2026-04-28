@@ -7,8 +7,18 @@ openai
 
 # PDF Parsing
 PyMuPDF
+pdf2image
 pdfplumber
 docling
+
+# Image Processing & OCR
+Pillow
+pytesseract
+opencv-python
+
+# Vision APIs
+azure-vision
+anthropic
 
 # NLP for chunking and question extraction
 spacy
@@ -20,3 +30,4 @@ langchain-chroma
 
 # Utilities
 python-dotenv
+numpy

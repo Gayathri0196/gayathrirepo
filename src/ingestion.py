@@ -21,6 +21,9 @@ import json
 import logging
 import fitz  # PyMuPDF
 
+from image_extraction import get_image_extractor
+from image_processing import get_image_processor, get_image_cache
+
 logger = logging.getLogger(__name__)
 
 # -- Configuration -------------------------------------------------------------
@@ -445,11 +448,14 @@ def ingest(pdf_paths: list | None = None) -> list:
     1. Discover source PDFs (or use explicit paths)
     2. Extract text from each source PDF
     3. Dynamically detect structure and chunk accordingly
-    4. Cache combined chunks to disk
-    5. Return list of chunks
+    4. Extract images from PDFs
+    5. Process images (OCR + vision APIs)
+    6. Create image description chunks
+    7. Cache combined chunks to disk
+    8. Return list of chunks
     """
     logger.info("=" * 60)
-    logger.info("INGESTION PIPELINE START")
+    logger.info("INGESTION PIPELINE START (with Image Processing)")
     logger.info("=" * 60)
 
     paths = list(pdf_paths) if pdf_paths else _list_source_pdfs(SOURCE_DIR)
@@ -465,13 +471,68 @@ def ingest(pdf_paths: list | None = None) -> list:
     is_multisource = len(paths) > 1
     logger.info(f"Found {len(paths)} source PDF(s) for ingestion")
 
+    # Initialize image processing tools
+    image_extractor = get_image_extractor()
+    image_processor = get_image_processor()
+    image_cache = get_image_cache()
+
     for pdf_path in paths:
         source_filename = os.path.basename(pdf_path)
+        
+        # --- Extract and chunk text ---
         pages = extract_text_from_pdf(pdf_path)
         doc_chunks = chunk_by_sections(pages, source_filename)
         if is_multisource:
             doc_chunks = _apply_multisource_ids(doc_chunks, source_filename)
         chunks.extend(doc_chunks)
+        
+        # --- Extract and process images ---
+        logger.info(f"Extracting images from {source_filename}...")
+        try:
+            image_metadata_list = image_extractor.extract_all_images(pdf_path)
+            
+            if image_metadata_list:
+                logger.info(f"Processing {len(image_metadata_list)} extracted images...")
+                
+                for image_meta in image_metadata_list:
+                    image_path = image_meta["image_path"]
+                    
+                    # Check cache first
+                    cached_analysis = image_cache.get(image_path)
+                    if cached_analysis:
+                        analysis = cached_analysis
+                        logger.info(f"Using cached analysis for {image_meta['image_filename']}")
+                    else:
+                        # Process image
+                        analysis = image_processor.process_image_complete(image_path)
+                        image_cache.set(image_path, analysis)
+                    
+                    # Create a chunk from image analysis
+                    combined_text = analysis.get("combined_text", "")
+                    if combined_text:
+                        image_chunk = {
+                            "text": combined_text,
+                            "section_id": f"img_{image_meta['page_number']}_{image_meta['image_index']}",
+                            "section_title": f"Image from Page {image_meta['page_number']}",
+                            "domain": "Images & Diagrams",
+                            "source_doc": source_filename,
+                            "page_start": image_meta["page_number"],
+                            "page_end": image_meta["page_number"],
+                            "image_path": image_path,
+                            "image_metadata": image_meta,
+                            "analysis_metadata": {
+                                "ocr_confidence": analysis.get("ocr_result", {}).get("confidence", 0),
+                                "has_azure_analysis": bool(analysis.get("azure_result")),
+                            },
+                        }
+                        chunks.append(image_chunk)
+                        logger.info(f"Created image chunk from {image_meta['image_filename']}")
+            else:
+                logger.info(f"No images found in {source_filename}")
+        
+        except Exception as e:
+            logger.error(f"Error processing images from {source_filename}: {e}")
+            logger.info("Continuing with text-only ingestion")
 
     # Keep deterministic ordering for repeatable retrieval/cache builds.
     chunks.sort(key=lambda c: (c.get("source_doc", ""), c.get("section_id", "")))
@@ -479,7 +540,7 @@ def ingest(pdf_paths: list | None = None) -> list:
     save_chunks(chunks)
 
     logger.info(
-        f"INGESTION COMPLETE: {len(chunks)} chunks from {len(paths)} source PDF(s) ready for embedding"
+        f"INGESTION COMPLETE: {len(chunks)} chunks (text + images) from {len(paths)} source PDF(s) ready for embedding"
     )
     return chunks
 

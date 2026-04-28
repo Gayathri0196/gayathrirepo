@@ -1,0 +1,2231 @@
+{
+  "summary": {
+    "total_parent_questions": 19,
+    "total_extracted_entries": 49,
+    "sentence_based_questions": 3,
+    "yes_no_questions": 7,
+    "gate_questions": 7,
+    "checklist_questions": 9,
+    "checklist_items": 39
+  },
+  "gate_hierarchy": [
+    {
+      "parent_gate_question": {
+        "question_id": "Q2",
+        "question_text": "Will there be a separate IQ plan and summary for this validation effort?",
+        "source_section": "1.2 Application Installation Qualification/Operational Qualification",
+        "stored_text": "Will there be a separate IQ plan and summary for this validation effort?\n\u2610 Yes \u2610 No"
+      },
+      "branch_options": [
+        {
+          "branch_name": "No",
+          "branch_text": "No (Select all that apply)",
+          "symbol": "\u2610",
+          "selected": false,
+          "checkbox_evidence": {
+            "page": 2,
+            "line_text": "\u2610 No (Select all that apply) \u2610 Yes (Select all that apply)",
+            "line_index": 21,
+            "option_text": "No (Select all that apply)",
+            "boxes": [
+              {
+                "x0": 316.49,
+                "x1": 326.45,
+                "top": 467.31,
+                "bottom": 477.27,
+                "state": "unchecked",
+                "evidence_type": "glyph"
+              }
+            ]
+          },
+          "children": []
+        },
+        {
+          "branch_name": "Yes",
+          "branch_text": "Yes (Select all that apply)",
+          "symbol": "\u2610",
+          "selected": false,
+          "checkbox_evidence": {
+            "page": 2,
+            "line_text": "\u2610 No (Select all that apply) \u2610 Yes (Select all that apply)",
+            "line_index": 21,
+            "option_text": "Yes (Select all that apply)",
+            "boxes": [
+              {
+                "x0": 79.34,
+                "x1": 89.3,
+                "top": 467.31,
+                "bottom": 477.27,
+                "state": "unchecked",
+                "evidence_type": "glyph"
+              }
+            ]
+          },
+          "children": []
+        }
+      ],
+      "selected_branch": "Unclear",
+      "dependency_status": "unresolved_parent_choice",
+      "dependent_sub_questions": [
+        {
+          "question_id": "Q3",
+          "question_text": "Which of the following points will IQ be executed?",
+          "domain": "checklist",
+          "dependency_status": "unresolved_parent_choice",
+          "stored_text": "Which of the following points will IQ be executed?\n\n\u2610 Prior to System Testing\n\u2610 Prior to UAT\n\u2610 Prior to application's release into production.\n\u2610 An IQ Plan will be created and approved prior to the execution of individual IQ scripts and/or procedures. The IQ Plan will document the environment description, hardware and software components, roles and responsibilities, supporting technical documentation and procedures, and expected deliverables for the IQ documentation.\n\u2610 An IQ Summary Report will be created after the system goes into production. The IQ Summary Report will summarize the IQ process and results for all environments and any deviations from the IQ Plan."
+        },
+        {
+          "question_id": "Q4",
+          "question_text": "How will IQ execution be documented?",
+          "domain": "checklist",
+          "dependency_status": "unresolved_parent_choice",
+          "stored_text": "How will IQ execution be documented?\n\n\u2610 Test script executions in <ALM\\_SYSTEM> (for configuration completed by <CLIENT\\_NAME>)\n\u2610 Test script executions on paper. These scripts will be stored:\n\u2610 Work Instructions\n\u2610 Other\n\u2610 IQ execution documents the technical specification of the component being installed, the installation procedure, verification steps, pass/fail indicator and verifiable objective evidence."
+        },
+        {
+          "question_id": "Q5",
+          "question_text": "Who will be performing IQ?",
+          "domain": "sentence_based",
+          "dependency_status": "unresolved_parent_choice",
+          "stored_text": "Who will be performing IQ?"
+        }
+      ]
+    },
+    {
+      "parent_gate_question": {
+        "question_id": "Q7",
+        "question_text": "Will there be a separate plan and summary for ST?",
+        "source_section": "1.3.1 System Testing",
+        "stored_text": "Will there be a separate plan and summary for ST?\n\u2610 Yes \u2610 No"
+      },
+      "branch_options": [
+        {
+          "branch_name": "Yes",
+          "branch_text": "Yes, A System Test Plan will be created. Once system testing is completed, a summary report will be generated to document the testing process and findings. The System Test Summary Report will be approved prior to the start of user acceptance testing execution activities.",
+          "symbol": "\u2610",
+          "selected": false,
+          "checkbox_evidence": {
+            "page": 2,
+            "line_text": "\u2610 No (Select all that apply) \u2610 Yes (Select all that apply)",
+            "line_index": 21,
+            "option_text": "Yes, A System Test Plan will be created. Once system testing is completed, a summary report will be generated to document the testing process and findings. The System Test Summary Report will be approved prior to the start of user acceptance testing execution activities.",
+            "boxes": [
+              {
+                "x0": 79.34,
+                "x1": 89.3,
+                "top": 467.31,
+                "bottom": 477.27,
+                "state": "unchecked",
+                "evidence_type": "glyph"
+              }
+            ]
+          },
+          "children": []
+        },
+        {
+          "branch_name": "No",
+          "branch_text": "No, This product was developed by a supplier. The SDLC process utilized by the supplier was reviewed during the supplier quality assessment and determined to be acceptable.",
+          "symbol": "\u2610",
+          "selected": false,
+          "checkbox_evidence": {
+            "page": 2,
+            "line_text": "\u2610 No (Select all that apply) \u2610 Yes (Select all that apply)",
+            "line_index": 21,
+            "option_text": "No, This product was developed by a supplier. The SDLC process utilized by the supplier was reviewed during the supplier quality assessment and determined to be acceptable.",
+            "boxes": [
+              {
+                "x0": 316.49,
+                "x1": 326.45,
+                "top": 467.31,
+                "bottom": 477.27,
+                "state": "unchecked",
+                "evidence_type": "glyph"
+              }
+            ]
+          },
+          "children": []
+        }
+      ],
+      "selected_branch": "Unclear",
+      "dependency_status": "unresolved_parent_choice",
+      "dependent_sub_questions": [
+        {
+          "question_id": "Q8",
+          "question_text": "Who will execute the System Test?",
+          "domain": "sentence_based",
+          "dependency_status": "unresolved_parent_choice",
+          "stored_text": "Who will execute the System Test?"
+        },
+        {
+          "question_id": "Q9",
+          "question_text": "How will ST execution be documented?",
+          "domain": "checklist",
+          "dependency_status": "unresolved_parent_choice",
+          "stored_text": "How will ST execution be documented?\n\n\u2610 Test script executions in <ALM\\_SYSTEM>\n\u2610 Test script executions on paper. Paper test scripts will be stored in:\n\u2610 Other"
+        }
+      ]
+    },
+    {
+      "parent_gate_question": {
+        "question_id": "Q10",
+        "question_text": "Will there be a separate plan and summary for UAT?",
+        "source_section": "1.3.2 User Acceptance Testing",
+        "stored_text": "Will there be a separate plan and summary for UAT?\n\u2610 Yes \u2610 No"
+      },
+      "branch_options": [
+        {
+          "branch_name": "Yes",
+          "branch_text": "Yes",
+          "symbol": "\u2610",
+          "selected": false,
+          "checkbox_evidence": {
+            "page": 2,
+            "line_text": "\u2610 No (Select all that apply) \u2610 Yes (Select all that apply)",
+            "line_index": 21,
+            "option_text": "Yes",
+            "boxes": [
+              {
+                "x0": 79.34,
+                "x1": 89.3,
+                "top": 467.31,
+                "bottom": 477.27,
+                "state": "unchecked",
+                "evidence_type": "glyph"
+              }
+            ]
+          },
+          "children": []
+        },
+        {
+          "branch_name": "No",
+          "branch_text": "No",
+          "symbol": "\u2610",
+          "selected": false,
+          "checkbox_evidence": {
+            "page": 2,
+            "line_text": "\u2610 No (Select all that apply) \u2610 Yes (Select all that apply)",
+            "line_index": 21,
+            "option_text": "No",
+            "boxes": [
+              {
+                "x0": 316.49,
+                "x1": 326.45,
+                "top": 467.31,
+                "bottom": 477.27,
+                "state": "unchecked",
+                "evidence_type": "glyph"
+              }
+            ]
+          },
+          "children": []
+        }
+      ],
+      "selected_branch": "Unclear",
+      "dependency_status": "unresolved_parent_choice",
+      "dependent_sub_questions": [
+        {
+          "question_id": "Q11",
+          "question_text": "Who will UAT be executed by?",
+          "domain": "sentence_based",
+          "dependency_status": "unresolved_parent_choice",
+          "stored_text": "Who will UAT be executed by?"
+        }
+      ]
+    },
+    {
+      "parent_gate_question": {
+        "question_id": "Q12",
+        "question_text": "Will impacted business units be engaged in the UAT process?",
+        "source_section": "1.3.2 User Acceptance Testing",
+        "stored_text": "Will impacted business units be engaged in the UAT process?\n\u2610 Yes \u2610 No"
+      },
+      "branch_options": [
+        {
+          "branch_name": "Yes",
+          "branch_text": "Yes",
+          "symbol": "\u2610",
+          "selected": false,
+          "checkbox_evidence": {
+            "page": 6,
+            "line_text": "Will impacted business units be \u2610 Yes",
+            "line_index": 132,
+            "option_text": "Yes",
+            "boxes": [
+              {
+                "x0": 255.17,
+                "x1": 265.13,
+                "top": 124.54,
+                "bottom": 134.5,
+                "state": "unchecked",
+                "evidence_type": "glyph"
+              }
+            ]
+          },
+          "children": []
+        },
+        {
+          "branch_name": "No",
+          "branch_text": "No",
+          "symbol": "\u2610",
+          "selected": false,
+          "checkbox_evidence": {
+            "page": 6,
+            "line_text": "\u2610 No",
+            "line_index": 134,
+            "option_text": "No",
+            "boxes": [
+              {
+                "x0": 255.41,
+                "x1": 265.37,
+                "top": 141.1,
+                "bottom": 151.06,
+                "state": "unchecked",
+                "evidence_type": "glyph"
+              }
+            ]
+          },
+          "children": []
+        }
+      ],
+      "selected_branch": "Unclear",
+      "dependency_status": "unresolved_parent_choice",
+      "dependent_sub_questions": [
+        {
+          "question_id": "Q13",
+          "question_text": "How will UAT execution be documented?",
+          "domain": "checklist",
+          "dependency_status": "unresolved_parent_choice",
+          "stored_text": "How will UAT execution be documented?\n\n\u2610 Test script executions in <ALM\\_SYSTEM>\n\u2610 Test script executions on paper. Paper test scripts will be stored in:\n\u2610 Work instructions\n\u2610 Other: Provide details- N/A"
+        }
+      ]
+    },
+    {
+      "parent_gate_question": {
+        "question_id": "Q14",
+        "question_text": "Is data migration included in this validation effort?",
+        "source_section": "1.3.3 Data Migration",
+        "stored_text": "Is data migration included in this validation effort?\n\u2610 Yes \u2610 No"
+      },
+      "branch_options": [
+        {
+          "branch_name": "Yes",
+          "branch_text": "Yes",
+          "symbol": "\u2610",
+          "selected": false,
+          "checkbox_evidence": {
+            "page": 6,
+            "line_text": "Yes",
+            "line_index": 145,
+            "option_text": "Yes",
+            "boxes": [
+              {
+                "x0": 454.9,
+                "x1": 464.86,
+                "top": 319.21,
+                "bottom": 329.17,
+                "state": "unchecked",
+                "evidence_type": "glyph"
+              }
+            ]
+          },
+          "children": []
+        },
+        {
+          "branch_name": "No",
+          "branch_text": "No",
+          "symbol": "\u2610",
+          "selected": false,
+          "checkbox_evidence": {
+            "page": 6,
+            "line_text": "\u2610 No",
+            "line_index": 147,
+            "option_text": "No",
+            "boxes": [
+              {
+                "x0": 454.9,
+                "x1": 464.86,
+                "top": 341.77,
+                "bottom": 351.73,
+                "state": "unchecked",
+                "evidence_type": "glyph"
+              }
+            ]
+          },
+          "children": []
+        }
+      ],
+      "selected_branch": "Unclear",
+      "dependency_status": "unresolved_parent_choice",
+      "dependent_sub_questions": [
+        {
+          "question_id": "Q15",
+          "question_text": "Which of these deliverables will apply?",
+          "domain": "checklist",
+          "dependency_status": "unresolved_parent_choice",
+          "stored_text": "Which of these deliverables will apply?\n\n\u2610 Data Migration Plan\n\u2610 Data Migration Testing/Verification\n\u2610 Data Migration Summary for Test\n\u2610 Data Migration Summary for Production\n\u2610 Data Migration Summary (Combined for Test and Production)"
+        }
+      ]
+    },
+    {
+      "parent_gate_question": {
+        "question_id": "Q16",
+        "question_text": "Will there be a separate plan and summary for data migration testing?",
+        "source_section": "1.3.3 Data Migration",
+        "stored_text": "Will there be a separate plan and summary for data migration testing?\n\u2610 Yes \u2610 No"
+      },
+      "branch_options": [
+        {
+          "branch_name": "Yes",
+          "branch_text": "Yes",
+          "symbol": "\u2610",
+          "selected": false,
+          "checkbox_evidence": {
+            "page": 6,
+            "line_text": "Will there be a separate plan and summary for data migration testing? \u2610 Yes",
+            "line_index": 156,
+            "option_text": "Yes",
+            "boxes": [
+              {
+                "x0": 454.9,
+                "x1": 464.86,
+                "top": 448.95,
+                "bottom": 458.91,
+                "state": "unchecked",
+                "evidence_type": "glyph"
+              }
+            ]
+          },
+          "children": []
+        },
+        {
+          "branch_name": "No",
+          "branch_text": "No",
+          "symbol": "\u2610",
+          "selected": false,
+          "checkbox_evidence": {
+            "page": 6,
+            "line_text": "\u2610 No",
+            "line_index": 157,
+            "option_text": "No",
+            "boxes": [
+              {
+                "x0": 454.9,
+                "x1": 464.86,
+                "top": 468.63,
+                "bottom": 478.59,
+                "state": "unchecked",
+                "evidence_type": "glyph"
+              }
+            ]
+          },
+          "children": []
+        }
+      ],
+      "selected_branch": "Unclear",
+      "dependency_status": "resolved",
+      "dependent_sub_questions": []
+    },
+    {
+      "parent_gate_question": {
+        "question_id": "Q17",
+        "question_text": "Is the traceability of the system being updated or changed as a result of this validation effort?",
+        "source_section": "1.3.4 Traceability",
+        "stored_text": "Is the traceability of the system being updated or changed as a result of this validation effort?\n\u2610 Yes \u2610 No"
+      },
+      "branch_options": [
+        {
+          "branch_name": "Yes",
+          "branch_text": "Yes",
+          "symbol": "\u2610",
+          "selected": false,
+          "checkbox_evidence": {
+            "page": 6,
+            "line_text": "Is the traceability of the system being updated or changed as a result of this \u2610 Yes",
+            "line_index": 160,
+            "option_text": "Yes",
+            "boxes": [
+              {
+                "x0": 454.9,
+                "x1": 464.86,
+                "top": 582.3,
+                "bottom": 592.26,
+                "state": "unchecked",
+                "evidence_type": "glyph"
+              }
+            ]
+          },
+          "children": []
+        },
+        {
+          "branch_name": "No",
+          "branch_text": "No",
+          "symbol": "\u2610",
+          "selected": false,
+          "checkbox_evidence": {
+            "page": 6,
+            "line_text": "\u2610 No",
+            "line_index": 163,
+            "option_text": "No",
+            "boxes": [
+              {
+                "x0": 454.9,
+                "x1": 464.86,
+                "top": 601.98,
+                "bottom": 611.94,
+                "state": "unchecked",
+                "evidence_type": "glyph"
+              }
+            ]
+          },
+          "children": []
+        }
+      ],
+      "selected_branch": "Unclear",
+      "dependency_status": "unresolved_parent_choice",
+      "dependent_sub_questions": [
+        {
+          "question_id": "Q18",
+          "question_text": "How is the traceability matrix being managed for this validation effort?",
+          "domain": "checklist",
+          "dependency_status": "unresolved_parent_choice",
+          "stored_text": "How is the traceability matrix being managed for this validation effort?\n\n\u2610 Project Specific Document\n\u2610 Living Document\n\u2610 Combination of Project Specific and Living Document"
+        },
+        {
+          "question_id": "Q19",
+          "question_text": "What is included in the traceability matrix?",
+          "domain": "checklist",
+          "dependency_status": "unresolved_parent_choice",
+          "stored_text": "What is included in the traceability matrix?\n\n\u2610 Requirements to Design\n\u2610 Design to ST\n\u2610 Requirements to UAT\n\u2610 Requirements to ST/UAT\n\u2610 Scope Items/Bug Fixes to ST/UAT\n\u2610 Other"
+        }
+      ]
+    }
+  ],
+  "stored_text": "Q1. Who will complete Infrastructure qualification activities?\n\n\u2610 <INFRA\\_PARTNER> according to their procedures\n\u2610 <CLIENT\\_NAME> Infrastructure Services according to their procedures\n\u2610 Other: <Vendor LMS Platform>\n\u2610 Not Applicable (because IQ is not in scope)\n\nAdditional Notes:\n\n\nQ2. Will there be a separate IQ plan and summary for this validation effort?\n\u2610 Yes \u2610 No\n\n  [Dependent sub-questions \u2014 resolved when branch is selected]\n  Q3. Which of the following points will IQ be executed?\n\n  \u2610 Prior to System Testing\n  \u2610 Prior to UAT\n  \u2610 Prior to application's release into production.\n  \u2610 An IQ Plan will be created and approved prior to the execution of individual IQ scripts and/or procedures. The IQ Plan will document the environment description, hardware and software components, roles and responsibilities, supporting technical documentation and procedures, and expected deliverables for the IQ documentation.\n  \u2610 An IQ Summary Report will be created after the system goes into production. The IQ Summary Report will summarize the IQ process and results for all environments and any deviations from the IQ Plan.\n\n  Notes:\n  \n\n  Q4. How will IQ execution be documented?\n\n  \u2610 Test script executions in <ALM\\_SYSTEM> (for configuration completed by <CLIENT\\_NAME>)\n  \u2610 Test script executions on paper. These scripts will be stored:\n  \u2610 Work Instructions\n  \u2610 Other\n  \u2610 IQ execution documents the technical specification of the component being installed, the installation procedure, verification steps, pass/fail indicator and verifiable objective evidence.\n\n  Q5. Who will be performing IQ?\n\n  Notes:\n  \n\nQ6. What type of testing will be completed for this validation effort?\n\n\u2610 System Testing (ST)\n\u2610 User Acceptance Testing (UAT) Combined\n\u2610 ST/UAT\n\u2610 Data Migration Testing (DM)\n\nQ7. Will there be a separate plan and summary for ST?\n\u2610 Yes \u2610 No\n\nNotes:\n\n\n  [Dependent sub-questions \u2014 resolved when branch is selected]\n  Q8. Who will execute the System Test?\n\n  Q9. How will ST execution be documented?\n\n  \u2610 Test script executions in <ALM\\_SYSTEM>\n  \u2610 Test script executions on paper. Paper test scripts will be stored in:\n  \u2610 Other\n\n  Additional Notes:\n  \n\nQ10. Will there be a separate plan and summary for UAT?\n\u2610 Yes \u2610 No\n\nNotes:\n\n\n  [Dependent sub-questions \u2014 resolved when branch is selected]\n  Q11. Who will UAT be executed by?\n\nQ12. Will impacted business units be engaged in the UAT process?\n\u2610 Yes \u2610 No\n\n  [Dependent sub-questions \u2014 resolved when branch is selected]\n  Q13. How will UAT execution be documented?\n\n  \u2610 Test script executions in <ALM\\_SYSTEM>\n  \u2610 Test script executions on paper. Paper test scripts will be stored in:\n  \u2610 Work instructions\n  \u2610 Other: Provide details- N/A\n\n  Additional Notes:\n  \n\nQ14. Is data migration included in this validation effort?\n\u2610 Yes \u2610 No\n\n  [Dependent sub-questions \u2014 resolved when branch is selected]\n  Q15. Which of these deliverables will apply?\n\n  \u2610 Data Migration Plan\n  \u2610 Data Migration Testing/Verification\n  \u2610 Data Migration Summary for Test\n  \u2610 Data Migration Summary for Production\n  \u2610 Data Migration Summary (Combined for Test and Production)\n\nQ16. Will there be a separate plan and summary for data migration testing?\n\u2610 Yes \u2610 No\n\nAdditional Notes:\n\n\nQ17. Is the traceability of the system being updated or changed as a result of this validation effort?\n\u2610 Yes \u2610 No\n\nNotes:\n\n\n  [Dependent sub-questions \u2014 resolved when branch is selected]\n  Q18. How is the traceability matrix being managed for this validation effort?\n\n  \u2610 Project Specific Document\n  \u2610 Living Document\n  \u2610 Combination of Project Specific and Living Document\n\n  Q19. What is included in the traceability matrix?\n\n  \u2610 Requirements to Design\n  \u2610 Design to ST\n  \u2610 Requirements to UAT\n  \u2610 Requirements to ST/UAT\n  \u2610 Scope Items/Bug Fixes to ST/UAT\n  \u2610 Other\n\n  Additional Notes:",
+  "domains": {
+    "sentence_based": [
+      {
+        "domain": "sentence_based",
+        "question_id": "Q5",
+        "question_text": "Who will be performing IQ?",
+        "descriptive_answer": null,
+        "source_section": "1.2 Application Installation Qualification/Operational Qualification",
+        "note_label": "Notes:",
+        "note_text": null,
+        "extraction_method": "Docling",
+        "confidence": "high",
+        "flags": []
+      },
+      {
+        "domain": "sentence_based",
+        "question_id": "Q8",
+        "question_text": "Who will execute the System Test?",
+        "descriptive_answer": null,
+        "source_section": "1.3.1 System Testing",
+        "note_label": null,
+        "note_text": null,
+        "extraction_method": "Docling",
+        "confidence": "high",
+        "flags": []
+      },
+      {
+        "domain": "sentence_based",
+        "question_id": "Q11",
+        "question_text": "Who will UAT be executed by?",
+        "descriptive_answer": null,
+        "source_section": "1.3.2 User Acceptance Testing",
+        "note_label": null,
+        "note_text": null,
+        "extraction_method": "Docling",
+        "confidence": "high",
+        "flags": []
+      }
+    ],
+    "checklist": [
+      {
+        "domain": "checklist",
+        "checklist_item_id": "Q1.1",
+        "parent_question_id": "Q1",
+        "question_text": "Who will complete Infrastructure qualification activities?",
+        "checklist_text": "<INFRA\\_PARTNER> according to their procedures",
+        "selected_value": "No",
+        "table_row_reference": "Page 2 / line 10",
+        "checkbox_evidence": {
+          "page": 2,
+          "line_text": "Who will complete \u2610 <INFRA_PARTNER> according to their procedures",
+          "line_index": 9,
+          "option_text": "<INFRA\\_PARTNER> according to their procedures",
+          "boxes": [
+            {
+              "x0": 238.85,
+              "x1": 248.81,
+              "top": 215.14,
+              "bottom": 225.1,
+              "state": "unchecked",
+              "evidence_type": "glyph"
+            }
+          ]
+        },
+        "source_section": "1.1 Infrastructure Installation Qualification/Operational Qualification",
+        "note_label": "Additional Notes:",
+        "note_text": null,
+        "extraction_method": "Docling + pdfplumber",
+        "confidence": "high",
+        "flags": []
+      },
+      {
+        "domain": "checklist",
+        "checklist_item_id": "Q1.2",
+        "parent_question_id": "Q1",
+        "question_text": "Who will complete Infrastructure qualification activities?",
+        "checklist_text": "<CLIENT\\_NAME> Infrastructure Services according to their procedures",
+        "selected_value": "No",
+        "table_row_reference": "Page 2 / line 13",
+        "checkbox_evidence": {
+          "page": 2,
+          "line_text": "<CLIENT_NAME> Infrastructure Services according to their",
+          "line_index": 12,
+          "option_text": "<CLIENT\\_NAME> Infrastructure Services according to their procedures",
+          "boxes": [
+            {
+              "x0": 238.85,
+              "x1": 248.81,
+              "top": 229.06,
+              "bottom": 239.02,
+              "state": "unchecked",
+              "evidence_type": "glyph"
+            }
+          ]
+        },
+        "source_section": "1.1 Infrastructure Installation Qualification/Operational Qualification",
+        "note_label": "Additional Notes:",
+        "note_text": null,
+        "extraction_method": "Docling + pdfplumber",
+        "confidence": "high",
+        "flags": []
+      },
+      {
+        "domain": "checklist",
+        "checklist_item_id": "Q1.3",
+        "parent_question_id": "Q1",
+        "question_text": "Who will complete Infrastructure qualification activities?",
+        "checklist_text": "Other: <Vendor LMS Platform>",
+        "selected_value": null,
+        "table_row_reference": null,
+        "checkbox_evidence": null,
+        "source_section": "1.1 Infrastructure Installation Qualification/Operational Qualification",
+        "note_label": "Additional Notes:",
+        "note_text": null,
+        "extraction_method": "Docling + pdfplumber",
+        "confidence": "low",
+        "flags": [
+          "missing_checkbox_evidence"
+        ]
+      },
+      {
+        "domain": "checklist",
+        "checklist_item_id": "Q1.4",
+        "parent_question_id": "Q1",
+        "question_text": "Who will complete Infrastructure qualification activities?",
+        "checklist_text": "Not Applicable (because IQ is not in scope)",
+        "selected_value": null,
+        "table_row_reference": null,
+        "checkbox_evidence": null,
+        "source_section": "1.1 Infrastructure Installation Qualification/Operational Qualification",
+        "note_label": "Additional Notes:",
+        "note_text": null,
+        "extraction_method": "Docling + pdfplumber",
+        "confidence": "low",
+        "flags": [
+          "missing_checkbox_evidence"
+        ]
+      },
+      {
+        "domain": "checklist",
+        "checklist_item_id": "Q3.1",
+        "parent_question_id": "Q3",
+        "question_text": "Which of the following points will IQ be executed?",
+        "checklist_text": "Prior to System Testing",
+        "selected_value": "No",
+        "table_row_reference": "Page 2 / line 26",
+        "checkbox_evidence": {
+          "page": 2,
+          "line_text": "Prior to System Testing",
+          "line_index": 25,
+          "option_text": "Prior to System Testing",
+          "boxes": [
+            {
+              "x0": 79.34,
+              "x1": 89.3,
+              "top": 516.99,
+              "bottom": 526.95,
+              "state": "unchecked",
+              "evidence_type": "glyph"
+            }
+          ]
+        },
+        "source_section": "1.2 Application Installation Qualification/Operational Qualification",
+        "note_label": "Notes:",
+        "note_text": null,
+        "extraction_method": "Docling + pdfplumber",
+        "confidence": "high",
+        "flags": []
+      },
+      {
+        "domain": "checklist",
+        "checklist_item_id": "Q3.2",
+        "parent_question_id": "Q3",
+        "question_text": "Which of the following points will IQ be executed?",
+        "checklist_text": "Prior to UAT",
+        "selected_value": "No",
+        "table_row_reference": "Page 2 / line 27",
+        "checkbox_evidence": {
+          "page": 2,
+          "line_text": "\u2610 Prior to UAT",
+          "line_index": 26,
+          "option_text": "Prior to UAT",
+          "boxes": [
+            {
+              "x0": 79.34,
+              "x1": 89.3,
+              "top": 534.63,
+              "bottom": 544.59,
+              "state": "unchecked",
+              "evidence_type": "glyph"
+            }
+          ]
+        },
+        "source_section": "1.2 Application Installation Qualification/Operational Qualification",
+        "note_label": "Notes:",
+        "note_text": null,
+        "extraction_method": "Docling + pdfplumber",
+        "confidence": "high",
+        "flags": []
+      },
+      {
+        "domain": "checklist",
+        "checklist_item_id": "Q3.3",
+        "parent_question_id": "Q3",
+        "question_text": "Which of the following points will IQ be executed?",
+        "checklist_text": "Prior to application's release into production.",
+        "selected_value": "No",
+        "table_row_reference": "Page 2 / line 26",
+        "checkbox_evidence": {
+          "page": 2,
+          "line_text": "Prior to System Testing",
+          "line_index": 25,
+          "option_text": "Prior to application's release into production.",
+          "boxes": [
+            {
+              "x0": 79.34,
+              "x1": 89.3,
+              "top": 516.99,
+              "bottom": 526.95,
+              "state": "unchecked",
+              "evidence_type": "glyph"
+            }
+          ]
+        },
+        "source_section": "1.2 Application Installation Qualification/Operational Qualification",
+        "note_label": "Notes:",
+        "note_text": null,
+        "extraction_method": "Docling + pdfplumber",
+        "confidence": "high",
+        "flags": []
+      },
+      {
+        "domain": "checklist",
+        "checklist_item_id": "Q3.4",
+        "parent_question_id": "Q3",
+        "question_text": "Which of the following points will IQ be executed?",
+        "checklist_text": "An IQ Plan will be created and approved prior to the execution of individual IQ scripts and/or procedures. The IQ Plan will document the environment description, hardware and software components, roles and responsibilities, supporting technical documentation and procedures, and expected deliverables for the IQ documentation.",
+        "selected_value": null,
+        "table_row_reference": null,
+        "checkbox_evidence": null,
+        "source_section": "1.2 Application Installation Qualification/Operational Qualification",
+        "note_label": "Notes:",
+        "note_text": null,
+        "extraction_method": "Docling + pdfplumber",
+        "confidence": "low",
+        "flags": [
+          "missing_checkbox_evidence"
+        ]
+      },
+      {
+        "domain": "checklist",
+        "checklist_item_id": "Q3.5",
+        "parent_question_id": "Q3",
+        "question_text": "Which of the following points will IQ be executed?",
+        "checklist_text": "An IQ Summary Report will be created after the system goes into production. The IQ Summary Report will summarize the IQ process and results for all environments and any deviations from the IQ Plan.",
+        "selected_value": null,
+        "table_row_reference": null,
+        "checkbox_evidence": null,
+        "source_section": "1.2 Application Installation Qualification/Operational Qualification",
+        "note_label": "Notes:",
+        "note_text": null,
+        "extraction_method": "Docling + pdfplumber",
+        "confidence": "low",
+        "flags": [
+          "missing_checkbox_evidence"
+        ]
+      },
+      {
+        "domain": "checklist",
+        "checklist_item_id": "Q4.1",
+        "parent_question_id": "Q4",
+        "question_text": "How will IQ execution be documented?",
+        "checklist_text": "Test script executions in <ALM\\_SYSTEM> (for configuration completed by <CLIENT\\_NAME>)",
+        "selected_value": "No",
+        "table_row_reference": "Page 3 / line 42",
+        "checkbox_evidence": {
+          "page": 3,
+          "line_text": "\u2610 Test script executions in <ALM_SYSTEM> (for",
+          "line_index": 41,
+          "option_text": "Test script executions in <ALM\\_SYSTEM> (for configuration completed by <CLIENT\\_NAME>)",
+          "boxes": [
+            {
+              "x0": 80.78,
+              "x1": 90.74,
+              "top": 94.54,
+              "bottom": 104.5,
+              "state": "unchecked",
+              "evidence_type": "glyph"
+            }
+          ]
+        },
+        "source_section": "1.2 Application Installation Qualification/Operational Qualification",
+        "note_label": null,
+        "note_text": null,
+        "extraction_method": "Docling + pdfplumber",
+        "confidence": "high",
+        "flags": []
+      },
+      {
+        "domain": "checklist",
+        "checklist_item_id": "Q4.2",
+        "parent_question_id": "Q4",
+        "question_text": "How will IQ execution be documented?",
+        "checklist_text": "Test script executions on paper. These scripts will be stored:",
+        "selected_value": "No",
+        "table_row_reference": "Page 3 / line 44",
+        "checkbox_evidence": {
+          "page": 3,
+          "line_text": "\u2610 Test script executions on paper. These scripts",
+          "line_index": 43,
+          "option_text": "Test script executions on paper. These scripts will be stored:",
+          "boxes": [
+            {
+              "x0": 80.78,
+              "x1": 90.74,
+              "top": 124.66,
+              "bottom": 134.62,
+              "state": "unchecked",
+              "evidence_type": "glyph"
+            }
+          ]
+        },
+        "source_section": "1.2 Application Installation Qualification/Operational Qualification",
+        "note_label": null,
+        "note_text": null,
+        "extraction_method": "Docling + pdfplumber",
+        "confidence": "high",
+        "flags": []
+      },
+      {
+        "domain": "checklist",
+        "checklist_item_id": "Q4.3",
+        "parent_question_id": "Q4",
+        "question_text": "How will IQ execution be documented?",
+        "checklist_text": "Work Instructions",
+        "selected_value": null,
+        "table_row_reference": null,
+        "checkbox_evidence": null,
+        "source_section": "1.2 Application Installation Qualification/Operational Qualification",
+        "note_label": null,
+        "note_text": null,
+        "extraction_method": "Docling + pdfplumber",
+        "confidence": "low",
+        "flags": [
+          "missing_checkbox_evidence"
+        ]
+      },
+      {
+        "domain": "checklist",
+        "checklist_item_id": "Q4.4",
+        "parent_question_id": "Q4",
+        "question_text": "How will IQ execution be documented?",
+        "checklist_text": "Other",
+        "selected_value": null,
+        "table_row_reference": null,
+        "checkbox_evidence": null,
+        "source_section": "1.2 Application Installation Qualification/Operational Qualification",
+        "note_label": null,
+        "note_text": null,
+        "extraction_method": "Docling + pdfplumber",
+        "confidence": "low",
+        "flags": [
+          "missing_checkbox_evidence"
+        ]
+      },
+      {
+        "domain": "checklist",
+        "checklist_item_id": "Q4.5",
+        "parent_question_id": "Q4",
+        "question_text": "How will IQ execution be documented?",
+        "checklist_text": "IQ execution documents the technical specification of the component being installed, the installation procedure, verification steps, pass/fail indicator and verifiable objective evidence.",
+        "selected_value": "No",
+        "table_row_reference": "Page 3 / line 41",
+        "checkbox_evidence": {
+          "page": 3,
+          "line_text": "How will IQ execution be documented? \u2610 IQ execution documents the technical",
+          "line_index": 40,
+          "option_text": "IQ execution documents the technical specification of the component being installed, the installation procedure, verification steps, pass/fail indicator and verifiable objective evidence.",
+          "boxes": [
+            {
+              "x0": 323.23,
+              "x1": 333.19,
+              "top": 79.9,
+              "bottom": 89.86,
+              "state": "unchecked",
+              "evidence_type": "glyph"
+            }
+          ]
+        },
+        "source_section": "1.2 Application Installation Qualification/Operational Qualification",
+        "note_label": null,
+        "note_text": null,
+        "extraction_method": "Docling + pdfplumber",
+        "confidence": "high",
+        "flags": []
+      },
+      {
+        "domain": "checklist",
+        "checklist_item_id": "Q6.1",
+        "parent_question_id": "Q6",
+        "question_text": "What type of testing will be completed for this validation effort?",
+        "checklist_text": "System Testing (ST)",
+        "selected_value": "No",
+        "table_row_reference": "Page 4 / line 60",
+        "checkbox_evidence": {
+          "page": 4,
+          "line_text": "What type of testing will be completed for \u2610 System Testing (ST)",
+          "line_index": 59,
+          "option_text": "System Testing (ST)",
+          "boxes": [
+            {
+              "x0": 287.21,
+              "x1": 297.17,
+              "top": 377.05,
+              "bottom": 387.01,
+              "state": "unchecked",
+              "evidence_type": "glyph"
+            }
+          ]
+        },
+        "source_section": "1.3 Testing Strategy",
+        "note_label": null,
+        "note_text": null,
+        "extraction_method": "Docling + pdfplumber",
+        "confidence": "high",
+        "flags": []
+      },
+      {
+        "domain": "checklist",
+        "checklist_item_id": "Q6.2",
+        "parent_question_id": "Q6",
+        "question_text": "What type of testing will be completed for this validation effort?",
+        "checklist_text": "User Acceptance Testing (UAT) Combined",
+        "selected_value": "No",
+        "table_row_reference": "Page 4 / line 62",
+        "checkbox_evidence": {
+          "page": 4,
+          "line_text": "User Acceptance Testing (UAT) Combined",
+          "line_index": 61,
+          "option_text": "User Acceptance Testing (UAT) Combined",
+          "boxes": [
+            {
+              "x0": 287.21,
+              "x1": 297.17,
+              "top": 391.09,
+              "bottom": 401.05,
+              "state": "unchecked",
+              "evidence_type": "glyph"
+            }
+          ]
+        },
+        "source_section": "1.3 Testing Strategy",
+        "note_label": null,
+        "note_text": null,
+        "extraction_method": "Docling + pdfplumber",
+        "confidence": "high",
+        "flags": []
+      },
+      {
+        "domain": "checklist",
+        "checklist_item_id": "Q6.3",
+        "parent_question_id": "Q6",
+        "question_text": "What type of testing will be completed for this validation effort?",
+        "checklist_text": "ST/UAT",
+        "selected_value": "No",
+        "table_row_reference": "Page 4 / line 63",
+        "checkbox_evidence": {
+          "page": 4,
+          "line_text": "\u2610 ST/UAT",
+          "line_index": 62,
+          "option_text": "ST/UAT",
+          "boxes": [
+            {
+              "x0": 287.21,
+              "x1": 297.17,
+              "top": 406.95,
+              "bottom": 416.91,
+              "state": "unchecked",
+              "evidence_type": "glyph"
+            }
+          ]
+        },
+        "source_section": "1.3 Testing Strategy",
+        "note_label": null,
+        "note_text": null,
+        "extraction_method": "Docling + pdfplumber",
+        "confidence": "high",
+        "flags": []
+      },
+      {
+        "domain": "checklist",
+        "checklist_item_id": "Q6.4",
+        "parent_question_id": "Q6",
+        "question_text": "What type of testing will be completed for this validation effort?",
+        "checklist_text": "Data Migration Testing (DM)",
+        "selected_value": "No",
+        "table_row_reference": "Page 4 / line 64",
+        "checkbox_evidence": {
+          "page": 4,
+          "line_text": "\u2610 Data Migration Testing (DM)",
+          "line_index": 63,
+          "option_text": "Data Migration Testing (DM)",
+          "boxes": [
+            {
+              "x0": 287.21,
+              "x1": 297.17,
+              "top": 422.91,
+              "bottom": 432.87,
+              "state": "unchecked",
+              "evidence_type": "glyph"
+            }
+          ]
+        },
+        "source_section": "1.3 Testing Strategy",
+        "note_label": null,
+        "note_text": null,
+        "extraction_method": "Docling + pdfplumber",
+        "confidence": "high",
+        "flags": []
+      },
+      {
+        "domain": "checklist",
+        "checklist_item_id": "Q9.1",
+        "parent_question_id": "Q9",
+        "question_text": "How will ST execution be documented?",
+        "checklist_text": "Test script executions in <ALM\\_SYSTEM>",
+        "selected_value": "No",
+        "table_row_reference": "Page 3 / line 42",
+        "checkbox_evidence": {
+          "page": 3,
+          "line_text": "\u2610 Test script executions in <ALM_SYSTEM> (for",
+          "line_index": 41,
+          "option_text": "Test script executions in <ALM\\_SYSTEM>",
+          "boxes": [
+            {
+              "x0": 80.78,
+              "x1": 90.74,
+              "top": 94.54,
+              "bottom": 104.5,
+              "state": "unchecked",
+              "evidence_type": "glyph"
+            }
+          ]
+        },
+        "source_section": "1.3.1 System Testing",
+        "note_label": "Additional Notes:",
+        "note_text": null,
+        "extraction_method": "Docling + pdfplumber",
+        "confidence": "high",
+        "flags": []
+      },
+      {
+        "domain": "checklist",
+        "checklist_item_id": "Q9.2",
+        "parent_question_id": "Q9",
+        "question_text": "How will ST execution be documented?",
+        "checklist_text": "Test script executions on paper. Paper test scripts will be stored in:",
+        "selected_value": "No",
+        "table_row_reference": "Page 3 / line 44",
+        "checkbox_evidence": {
+          "page": 3,
+          "line_text": "\u2610 Test script executions on paper. These scripts",
+          "line_index": 43,
+          "option_text": "Test script executions on paper. Paper test scripts will be stored in:",
+          "boxes": [
+            {
+              "x0": 80.78,
+              "x1": 90.74,
+              "top": 124.66,
+              "bottom": 134.62,
+              "state": "unchecked",
+              "evidence_type": "glyph"
+            }
+          ]
+        },
+        "source_section": "1.3.1 System Testing",
+        "note_label": "Additional Notes:",
+        "note_text": null,
+        "extraction_method": "Docling + pdfplumber",
+        "confidence": "high",
+        "flags": []
+      },
+      {
+        "domain": "checklist",
+        "checklist_item_id": "Q9.3",
+        "parent_question_id": "Q9",
+        "question_text": "How will ST execution be documented?",
+        "checklist_text": "Other",
+        "selected_value": null,
+        "table_row_reference": null,
+        "checkbox_evidence": null,
+        "source_section": "1.3.1 System Testing",
+        "note_label": "Additional Notes:",
+        "note_text": null,
+        "extraction_method": "Docling + pdfplumber",
+        "confidence": "low",
+        "flags": [
+          "missing_checkbox_evidence"
+        ]
+      },
+      {
+        "domain": "checklist",
+        "checklist_item_id": "Q13.1",
+        "parent_question_id": "Q13",
+        "question_text": "How will UAT execution be documented?",
+        "checklist_text": "Test script executions in <ALM\\_SYSTEM>",
+        "selected_value": "No",
+        "table_row_reference": "Page 3 / line 42",
+        "checkbox_evidence": {
+          "page": 3,
+          "line_text": "\u2610 Test script executions in <ALM_SYSTEM> (for",
+          "line_index": 41,
+          "option_text": "Test script executions in <ALM\\_SYSTEM>",
+          "boxes": [
+            {
+              "x0": 80.78,
+              "x1": 90.74,
+              "top": 94.54,
+              "bottom": 104.5,
+              "state": "unchecked",
+              "evidence_type": "glyph"
+            }
+          ]
+        },
+        "source_section": "1.3.2 User Acceptance Testing",
+        "note_label": "Additional Notes:",
+        "note_text": null,
+        "extraction_method": "Docling + pdfplumber",
+        "confidence": "high",
+        "flags": []
+      },
+      {
+        "domain": "checklist",
+        "checklist_item_id": "Q13.2",
+        "parent_question_id": "Q13",
+        "question_text": "How will UAT execution be documented?",
+        "checklist_text": "Test script executions on paper. Paper test scripts will be stored in:",
+        "selected_value": "No",
+        "table_row_reference": "Page 3 / line 44",
+        "checkbox_evidence": {
+          "page": 3,
+          "line_text": "\u2610 Test script executions on paper. These scripts",
+          "line_index": 43,
+          "option_text": "Test script executions on paper. Paper test scripts will be stored in:",
+          "boxes": [
+            {
+              "x0": 80.78,
+              "x1": 90.74,
+              "top": 124.66,
+              "bottom": 134.62,
+              "state": "unchecked",
+              "evidence_type": "glyph"
+            }
+          ]
+        },
+        "source_section": "1.3.2 User Acceptance Testing",
+        "note_label": "Additional Notes:",
+        "note_text": null,
+        "extraction_method": "Docling + pdfplumber",
+        "confidence": "high",
+        "flags": []
+      },
+      {
+        "domain": "checklist",
+        "checklist_item_id": "Q13.3",
+        "parent_question_id": "Q13",
+        "question_text": "How will UAT execution be documented?",
+        "checklist_text": "Work instructions",
+        "selected_value": null,
+        "table_row_reference": null,
+        "checkbox_evidence": null,
+        "source_section": "1.3.2 User Acceptance Testing",
+        "note_label": "Additional Notes:",
+        "note_text": null,
+        "extraction_method": "Docling + pdfplumber",
+        "confidence": "low",
+        "flags": [
+          "missing_checkbox_evidence"
+        ]
+      },
+      {
+        "domain": "checklist",
+        "checklist_item_id": "Q13.4",
+        "parent_question_id": "Q13",
+        "question_text": "How will UAT execution be documented?",
+        "checklist_text": "Other: Provide details- N/A",
+        "selected_value": null,
+        "table_row_reference": null,
+        "checkbox_evidence": null,
+        "source_section": "1.3.2 User Acceptance Testing",
+        "note_label": "Additional Notes:",
+        "note_text": null,
+        "extraction_method": "Docling + pdfplumber",
+        "confidence": "low",
+        "flags": [
+          "missing_checkbox_evidence"
+        ]
+      },
+      {
+        "domain": "checklist",
+        "checklist_item_id": "Q15.1",
+        "parent_question_id": "Q15",
+        "question_text": "Which of these deliverables will apply?",
+        "checklist_text": "Data Migration Plan",
+        "selected_value": "No",
+        "table_row_reference": "Page 6 / line 149",
+        "checkbox_evidence": {
+          "page": 6,
+          "line_text": "Which of these deliverables \u2610 Data Migration Plan",
+          "line_index": 148,
+          "option_text": "Data Migration Plan",
+          "boxes": [
+            {
+              "x0": 227.57,
+              "x1": 237.53,
+              "top": 362.89,
+              "bottom": 372.85,
+              "state": "unchecked",
+              "evidence_type": "glyph"
+            }
+          ]
+        },
+        "source_section": "1.3.3 Data Migration",
+        "note_label": null,
+        "note_text": null,
+        "extraction_method": "Docling + pdfplumber",
+        "confidence": "high",
+        "flags": []
+      },
+      {
+        "domain": "checklist",
+        "checklist_item_id": "Q15.2",
+        "parent_question_id": "Q15",
+        "question_text": "Which of these deliverables will apply?",
+        "checklist_text": "Data Migration Testing/Verification",
+        "selected_value": "No",
+        "table_row_reference": "Page 6 / line 152",
+        "checkbox_evidence": {
+          "page": 6,
+          "line_text": "Data Migration Testing/Verification",
+          "line_index": 151,
+          "option_text": "Data Migration Testing/Verification",
+          "boxes": [
+            {
+              "x0": 227.57,
+              "x1": 237.53,
+              "top": 378.97,
+              "bottom": 388.93,
+              "state": "unchecked",
+              "evidence_type": "glyph"
+            }
+          ]
+        },
+        "source_section": "1.3.3 Data Migration",
+        "note_label": null,
+        "note_text": null,
+        "extraction_method": "Docling + pdfplumber",
+        "confidence": "high",
+        "flags": []
+      },
+      {
+        "domain": "checklist",
+        "checklist_item_id": "Q15.3",
+        "parent_question_id": "Q15",
+        "question_text": "Which of these deliverables will apply?",
+        "checklist_text": "Data Migration Summary for Test",
+        "selected_value": "No",
+        "table_row_reference": "Page 6 / line 153",
+        "checkbox_evidence": {
+          "page": 6,
+          "line_text": "\u2610 Data Migration Summary for Test",
+          "line_index": 152,
+          "option_text": "Data Migration Summary for Test",
+          "boxes": [
+            {
+              "x0": 227.57,
+              "x1": 237.53,
+              "top": 395.05,
+              "bottom": 405.01,
+              "state": "unchecked",
+              "evidence_type": "glyph"
+            }
+          ]
+        },
+        "source_section": "1.3.3 Data Migration",
+        "note_label": null,
+        "note_text": null,
+        "extraction_method": "Docling + pdfplumber",
+        "confidence": "high",
+        "flags": []
+      },
+      {
+        "domain": "checklist",
+        "checklist_item_id": "Q15.4",
+        "parent_question_id": "Q15",
+        "question_text": "Which of these deliverables will apply?",
+        "checklist_text": "Data Migration Summary for Production",
+        "selected_value": "No",
+        "table_row_reference": "Page 6 / line 153",
+        "checkbox_evidence": {
+          "page": 6,
+          "line_text": "\u2610 Data Migration Summary for Test",
+          "line_index": 152,
+          "option_text": "Data Migration Summary for Production",
+          "boxes": [
+            {
+              "x0": 227.57,
+              "x1": 237.53,
+              "top": 395.05,
+              "bottom": 405.01,
+              "state": "unchecked",
+              "evidence_type": "glyph"
+            }
+          ]
+        },
+        "source_section": "1.3.3 Data Migration",
+        "note_label": null,
+        "note_text": null,
+        "extraction_method": "Docling + pdfplumber",
+        "confidence": "high",
+        "flags": []
+      },
+      {
+        "domain": "checklist",
+        "checklist_item_id": "Q15.5",
+        "parent_question_id": "Q15",
+        "question_text": "Which of these deliverables will apply?",
+        "checklist_text": "Data Migration Summary (Combined for Test and Production)",
+        "selected_value": "No",
+        "table_row_reference": "Page 6 / line 153",
+        "checkbox_evidence": {
+          "page": 6,
+          "line_text": "\u2610 Data Migration Summary for Test",
+          "line_index": 152,
+          "option_text": "Data Migration Summary (Combined for Test and Production)",
+          "boxes": [
+            {
+              "x0": 227.57,
+              "x1": 237.53,
+              "top": 395.05,
+              "bottom": 405.01,
+              "state": "unchecked",
+              "evidence_type": "glyph"
+            }
+          ]
+        },
+        "source_section": "1.3.3 Data Migration",
+        "note_label": null,
+        "note_text": null,
+        "extraction_method": "Docling + pdfplumber",
+        "confidence": "high",
+        "flags": []
+      },
+      {
+        "domain": "checklist",
+        "checklist_item_id": "Q18.1",
+        "parent_question_id": "Q18",
+        "question_text": "How is the traceability matrix being managed for this validation effort?",
+        "checklist_text": "Project Specific Document",
+        "selected_value": "No",
+        "table_row_reference": "Page 5 / line 126",
+        "checkbox_evidence": {
+          "page": 5,
+          "line_text": "\u2610 The validation effort for this project is simple and",
+          "line_index": 125,
+          "option_text": "Project Specific Document",
+          "boxes": [
+            {
+              "x0": 255.89,
+              "x1": 265.85,
+              "top": 571.95,
+              "bottom": 581.91,
+              "state": "unchecked",
+              "evidence_type": "glyph"
+            }
+          ]
+        },
+        "source_section": "1.3.4 Traceability",
+        "note_label": null,
+        "note_text": null,
+        "extraction_method": "Docling + pdfplumber",
+        "confidence": "high",
+        "flags": []
+      },
+      {
+        "domain": "checklist",
+        "checklist_item_id": "Q18.2",
+        "parent_question_id": "Q18",
+        "question_text": "How is the traceability matrix being managed for this validation effort?",
+        "checklist_text": "Living Document",
+        "selected_value": null,
+        "table_row_reference": null,
+        "checkbox_evidence": null,
+        "source_section": "1.3.4 Traceability",
+        "note_label": null,
+        "note_text": null,
+        "extraction_method": "Docling + pdfplumber",
+        "confidence": "low",
+        "flags": [
+          "missing_checkbox_evidence"
+        ]
+      },
+      {
+        "domain": "checklist",
+        "checklist_item_id": "Q18.3",
+        "parent_question_id": "Q18",
+        "question_text": "How is the traceability matrix being managed for this validation effort?",
+        "checklist_text": "Combination of Project Specific and Living Document",
+        "selected_value": null,
+        "table_row_reference": null,
+        "checkbox_evidence": null,
+        "source_section": "1.3.4 Traceability",
+        "note_label": null,
+        "note_text": null,
+        "extraction_method": "Docling + pdfplumber",
+        "confidence": "low",
+        "flags": [
+          "missing_checkbox_evidence"
+        ]
+      },
+      {
+        "domain": "checklist",
+        "checklist_item_id": "Q19.1",
+        "parent_question_id": "Q19",
+        "question_text": "What is included in the traceability matrix?",
+        "checklist_text": "Requirements to Design",
+        "selected_value": "No",
+        "table_row_reference": "Page 7 / line 174",
+        "checkbox_evidence": {
+          "page": 7,
+          "line_text": "\u2610 Requirements to Design",
+          "line_index": 173,
+          "option_text": "Requirements to Design",
+          "boxes": [
+            {
+              "x0": 226.85,
+              "x1": 236.81,
+              "top": 79.54,
+              "bottom": 89.5,
+              "state": "unchecked",
+              "evidence_type": "glyph"
+            }
+          ]
+        },
+        "source_section": "1.3.4 Traceability",
+        "note_label": "Additional Notes:",
+        "note_text": null,
+        "extraction_method": "Docling + pdfplumber",
+        "confidence": "high",
+        "flags": []
+      },
+      {
+        "domain": "checklist",
+        "checklist_item_id": "Q19.2",
+        "parent_question_id": "Q19",
+        "question_text": "What is included in the traceability matrix?",
+        "checklist_text": "Design to ST",
+        "selected_value": "No",
+        "table_row_reference": "Page 7 / line 176",
+        "checkbox_evidence": {
+          "page": 7,
+          "line_text": "Design to ST",
+          "line_index": 175,
+          "option_text": "Design to ST",
+          "boxes": [
+            {
+              "x0": 226.85,
+              "x1": 236.81,
+              "top": 97.42,
+              "bottom": 107.38,
+              "state": "unchecked",
+              "evidence_type": "glyph"
+            }
+          ]
+        },
+        "source_section": "1.3.4 Traceability",
+        "note_label": "Additional Notes:",
+        "note_text": null,
+        "extraction_method": "Docling + pdfplumber",
+        "confidence": "high",
+        "flags": []
+      },
+      {
+        "domain": "checklist",
+        "checklist_item_id": "Q19.3",
+        "parent_question_id": "Q19",
+        "question_text": "What is included in the traceability matrix?",
+        "checklist_text": "Requirements to UAT",
+        "selected_value": "No",
+        "table_row_reference": "Page 7 / line 174",
+        "checkbox_evidence": {
+          "page": 7,
+          "line_text": "\u2610 Requirements to Design",
+          "line_index": 173,
+          "option_text": "Requirements to UAT",
+          "boxes": [
+            {
+              "x0": 226.85,
+              "x1": 236.81,
+              "top": 79.54,
+              "bottom": 89.5,
+              "state": "unchecked",
+              "evidence_type": "glyph"
+            }
+          ]
+        },
+        "source_section": "1.3.4 Traceability",
+        "note_label": "Additional Notes:",
+        "note_text": null,
+        "extraction_method": "Docling + pdfplumber",
+        "confidence": "high",
+        "flags": []
+      },
+      {
+        "domain": "checklist",
+        "checklist_item_id": "Q19.4",
+        "parent_question_id": "Q19",
+        "question_text": "What is included in the traceability matrix?",
+        "checklist_text": "Requirements to ST/UAT",
+        "selected_value": "No",
+        "table_row_reference": "Page 7 / line 174",
+        "checkbox_evidence": {
+          "page": 7,
+          "line_text": "\u2610 Requirements to Design",
+          "line_index": 173,
+          "option_text": "Requirements to ST/UAT",
+          "boxes": [
+            {
+              "x0": 226.85,
+              "x1": 236.81,
+              "top": 79.54,
+              "bottom": 89.5,
+              "state": "unchecked",
+              "evidence_type": "glyph"
+            }
+          ]
+        },
+        "source_section": "1.3.4 Traceability",
+        "note_label": "Additional Notes:",
+        "note_text": null,
+        "extraction_method": "Docling + pdfplumber",
+        "confidence": "high",
+        "flags": []
+      },
+      {
+        "domain": "checklist",
+        "checklist_item_id": "Q19.5",
+        "parent_question_id": "Q19",
+        "question_text": "What is included in the traceability matrix?",
+        "checklist_text": "Scope Items/Bug Fixes to ST/UAT",
+        "selected_value": null,
+        "table_row_reference": null,
+        "checkbox_evidence": null,
+        "source_section": "1.3.4 Traceability",
+        "note_label": "Additional Notes:",
+        "note_text": null,
+        "extraction_method": "Docling + pdfplumber",
+        "confidence": "low",
+        "flags": [
+          "missing_checkbox_evidence"
+        ]
+      },
+      {
+        "domain": "checklist",
+        "checklist_item_id": "Q19.6",
+        "parent_question_id": "Q19",
+        "question_text": "What is included in the traceability matrix?",
+        "checklist_text": "Other",
+        "selected_value": null,
+        "table_row_reference": null,
+        "checkbox_evidence": null,
+        "source_section": "1.3.4 Traceability",
+        "note_label": "Additional Notes:",
+        "note_text": null,
+        "extraction_method": "Docling + pdfplumber",
+        "confidence": "low",
+        "flags": [
+          "missing_checkbox_evidence"
+        ]
+      }
+    ],
+    "yes_no": [
+      {
+        "domain": "yes_no",
+        "question_id": "Q2",
+        "question_text": "Will there be a separate IQ plan and summary for this validation effort?",
+        "selected_answer": null,
+        "branch_options": [
+          {
+            "branch_name": "No",
+            "branch_text": "No (Select all that apply)",
+            "selected": false,
+            "checkbox_evidence": {
+              "page": 2,
+              "line_text": "\u2610 No (Select all that apply) \u2610 Yes (Select all that apply)",
+              "line_index": 21,
+              "option_text": "No (Select all that apply)",
+              "boxes": [
+                {
+                  "x0": 316.49,
+                  "x1": 326.45,
+                  "top": 467.31,
+                  "bottom": 477.27,
+                  "state": "unchecked",
+                  "evidence_type": "glyph"
+                }
+              ]
+            }
+          },
+          {
+            "branch_name": "Yes",
+            "branch_text": "Yes (Select all that apply)",
+            "selected": false,
+            "checkbox_evidence": {
+              "page": 2,
+              "line_text": "\u2610 No (Select all that apply) \u2610 Yes (Select all that apply)",
+              "line_index": 21,
+              "option_text": "Yes (Select all that apply)",
+              "boxes": [
+                {
+                  "x0": 79.34,
+                  "x1": 89.3,
+                  "top": 467.31,
+                  "bottom": 477.27,
+                  "state": "unchecked",
+                  "evidence_type": "glyph"
+                }
+              ]
+            }
+          }
+        ],
+        "checkbox_evidence": {
+          "No": {
+            "page": 2,
+            "line_text": "\u2610 No (Select all that apply) \u2610 Yes (Select all that apply)",
+            "line_index": 21,
+            "option_text": "No (Select all that apply)",
+            "boxes": [
+              {
+                "x0": 316.49,
+                "x1": 326.45,
+                "top": 467.31,
+                "bottom": 477.27,
+                "state": "unchecked",
+                "evidence_type": "glyph"
+              }
+            ]
+          },
+          "Yes": {
+            "page": 2,
+            "line_text": "\u2610 No (Select all that apply) \u2610 Yes (Select all that apply)",
+            "line_index": 21,
+            "option_text": "Yes (Select all that apply)",
+            "boxes": [
+              {
+                "x0": 79.34,
+                "x1": 89.3,
+                "top": 467.31,
+                "bottom": 477.27,
+                "state": "unchecked",
+                "evidence_type": "glyph"
+              }
+            ]
+          }
+        },
+        "source_section": "1.2 Application Installation Qualification/Operational Qualification",
+        "note_label": null,
+        "note_text": null,
+        "extraction_method": "Docling + pdfplumber",
+        "confidence": "low",
+        "flags": [
+          "selected_answer_unclear"
+        ]
+      },
+      {
+        "domain": "yes_no",
+        "question_id": "Q7",
+        "question_text": "Will there be a separate plan and summary for ST?",
+        "selected_answer": null,
+        "branch_options": [
+          {
+            "branch_name": "Yes",
+            "branch_text": "Yes, A System Test Plan will be created. Once system testing is completed, a summary report will be generated to document the testing process and findings. The System Test Summary Report will be approved prior to the start of user acceptance testing execution activities.",
+            "selected": false,
+            "checkbox_evidence": {
+              "page": 2,
+              "line_text": "\u2610 No (Select all that apply) \u2610 Yes (Select all that apply)",
+              "line_index": 21,
+              "option_text": "Yes, A System Test Plan will be created. Once system testing is completed, a summary report will be generated to document the testing process and findings. The System Test Summary Report will be approved prior to the start of user acceptance testing execution activities.",
+              "boxes": [
+                {
+                  "x0": 79.34,
+                  "x1": 89.3,
+                  "top": 467.31,
+                  "bottom": 477.27,
+                  "state": "unchecked",
+                  "evidence_type": "glyph"
+                }
+              ]
+            }
+          },
+          {
+            "branch_name": "No",
+            "branch_text": "No, This product was developed by a supplier. The SDLC process utilized by the supplier was reviewed during the supplier quality assessment and determined to be acceptable.",
+            "selected": false,
+            "checkbox_evidence": {
+              "page": 2,
+              "line_text": "\u2610 No (Select all that apply) \u2610 Yes (Select all that apply)",
+              "line_index": 21,
+              "option_text": "No, This product was developed by a supplier. The SDLC process utilized by the supplier was reviewed during the supplier quality assessment and determined to be acceptable.",
+              "boxes": [
+                {
+                  "x0": 316.49,
+                  "x1": 326.45,
+                  "top": 467.31,
+                  "bottom": 477.27,
+                  "state": "unchecked",
+                  "evidence_type": "glyph"
+                }
+              ]
+            }
+          }
+        ],
+        "checkbox_evidence": {
+          "Yes": {
+            "page": 2,
+            "line_text": "\u2610 No (Select all that apply) \u2610 Yes (Select all that apply)",
+            "line_index": 21,
+            "option_text": "Yes, A System Test Plan will be created. Once system testing is completed, a summary report will be generated to document the testing process and findings. The System Test Summary Report will be approved prior to the start of user acceptance testing execution activities.",
+            "boxes": [
+              {
+                "x0": 79.34,
+                "x1": 89.3,
+                "top": 467.31,
+                "bottom": 477.27,
+                "state": "unchecked",
+                "evidence_type": "glyph"
+              }
+            ]
+          },
+          "No": {
+            "page": 2,
+            "line_text": "\u2610 No (Select all that apply) \u2610 Yes (Select all that apply)",
+            "line_index": 21,
+            "option_text": "No, This product was developed by a supplier. The SDLC process utilized by the supplier was reviewed during the supplier quality assessment and determined to be acceptable.",
+            "boxes": [
+              {
+                "x0": 316.49,
+                "x1": 326.45,
+                "top": 467.31,
+                "bottom": 477.27,
+                "state": "unchecked",
+                "evidence_type": "glyph"
+              }
+            ]
+          }
+        },
+        "source_section": "1.3.1 System Testing",
+        "note_label": "Notes:",
+        "note_text": null,
+        "extraction_method": "Docling + pdfplumber",
+        "confidence": "low",
+        "flags": [
+          "selected_answer_unclear"
+        ]
+      },
+      {
+        "domain": "yes_no",
+        "question_id": "Q10",
+        "question_text": "Will there be a separate plan and summary for UAT?",
+        "selected_answer": null,
+        "branch_options": [
+          {
+            "branch_name": "Yes",
+            "branch_text": "Yes",
+            "selected": false,
+            "checkbox_evidence": {
+              "page": 2,
+              "line_text": "\u2610 No (Select all that apply) \u2610 Yes (Select all that apply)",
+              "line_index": 21,
+              "option_text": "Yes",
+              "boxes": [
+                {
+                  "x0": 79.34,
+                  "x1": 89.3,
+                  "top": 467.31,
+                  "bottom": 477.27,
+                  "state": "unchecked",
+                  "evidence_type": "glyph"
+                }
+              ]
+            }
+          },
+          {
+            "branch_name": "No",
+            "branch_text": "No",
+            "selected": false,
+            "checkbox_evidence": {
+              "page": 2,
+              "line_text": "\u2610 No (Select all that apply) \u2610 Yes (Select all that apply)",
+              "line_index": 21,
+              "option_text": "No",
+              "boxes": [
+                {
+                  "x0": 316.49,
+                  "x1": 326.45,
+                  "top": 467.31,
+                  "bottom": 477.27,
+                  "state": "unchecked",
+                  "evidence_type": "glyph"
+                }
+              ]
+            }
+          }
+        ],
+        "checkbox_evidence": {
+          "Yes": {
+            "page": 2,
+            "line_text": "\u2610 No (Select all that apply) \u2610 Yes (Select all that apply)",
+            "line_index": 21,
+            "option_text": "Yes",
+            "boxes": [
+              {
+                "x0": 79.34,
+                "x1": 89.3,
+                "top": 467.31,
+                "bottom": 477.27,
+                "state": "unchecked",
+                "evidence_type": "glyph"
+              }
+            ]
+          },
+          "No": {
+            "page": 2,
+            "line_text": "\u2610 No (Select all that apply) \u2610 Yes (Select all that apply)",
+            "line_index": 21,
+            "option_text": "No",
+            "boxes": [
+              {
+                "x0": 316.49,
+                "x1": 326.45,
+                "top": 467.31,
+                "bottom": 477.27,
+                "state": "unchecked",
+                "evidence_type": "glyph"
+              }
+            ]
+          }
+        },
+        "source_section": "1.3.2 User Acceptance Testing",
+        "note_label": "Notes:",
+        "note_text": null,
+        "extraction_method": "Docling + pdfplumber",
+        "confidence": "low",
+        "flags": [
+          "selected_answer_unclear"
+        ]
+      },
+      {
+        "domain": "yes_no",
+        "question_id": "Q12",
+        "question_text": "Will impacted business units be engaged in the UAT process?",
+        "selected_answer": null,
+        "branch_options": [
+          {
+            "branch_name": "Yes",
+            "branch_text": "Yes",
+            "selected": false,
+            "checkbox_evidence": {
+              "page": 6,
+              "line_text": "Will impacted business units be \u2610 Yes",
+              "line_index": 132,
+              "option_text": "Yes",
+              "boxes": [
+                {
+                  "x0": 255.17,
+                  "x1": 265.13,
+                  "top": 124.54,
+                  "bottom": 134.5,
+                  "state": "unchecked",
+                  "evidence_type": "glyph"
+                }
+              ]
+            }
+          },
+          {
+            "branch_name": "No",
+            "branch_text": "No",
+            "selected": false,
+            "checkbox_evidence": {
+              "page": 6,
+              "line_text": "\u2610 No",
+              "line_index": 134,
+              "option_text": "No",
+              "boxes": [
+                {
+                  "x0": 255.41,
+                  "x1": 265.37,
+                  "top": 141.1,
+                  "bottom": 151.06,
+                  "state": "unchecked",
+                  "evidence_type": "glyph"
+                }
+              ]
+            }
+          }
+        ],
+        "checkbox_evidence": {
+          "Yes": {
+            "page": 6,
+            "line_text": "Will impacted business units be \u2610 Yes",
+            "line_index": 132,
+            "option_text": "Yes",
+            "boxes": [
+              {
+                "x0": 255.17,
+                "x1": 265.13,
+                "top": 124.54,
+                "bottom": 134.5,
+                "state": "unchecked",
+                "evidence_type": "glyph"
+              }
+            ]
+          },
+          "No": {
+            "page": 6,
+            "line_text": "\u2610 No",
+            "line_index": 134,
+            "option_text": "No",
+            "boxes": [
+              {
+                "x0": 255.41,
+                "x1": 265.37,
+                "top": 141.1,
+                "bottom": 151.06,
+                "state": "unchecked",
+                "evidence_type": "glyph"
+              }
+            ]
+          }
+        },
+        "source_section": "1.3.2 User Acceptance Testing",
+        "note_label": null,
+        "note_text": null,
+        "extraction_method": "Docling + pdfplumber",
+        "confidence": "low",
+        "flags": [
+          "selected_answer_unclear"
+        ]
+      },
+      {
+        "domain": "yes_no",
+        "question_id": "Q14",
+        "question_text": "Is data migration included in this validation effort?",
+        "selected_answer": null,
+        "branch_options": [
+          {
+            "branch_name": "Yes",
+            "branch_text": "Yes",
+            "selected": false,
+            "checkbox_evidence": {
+              "page": 6,
+              "line_text": "Yes",
+              "line_index": 145,
+              "option_text": "Yes",
+              "boxes": [
+                {
+                  "x0": 454.9,
+                  "x1": 464.86,
+                  "top": 319.21,
+                  "bottom": 329.17,
+                  "state": "unchecked",
+                  "evidence_type": "glyph"
+                }
+              ]
+            }
+          },
+          {
+            "branch_name": "No",
+            "branch_text": "No",
+            "selected": false,
+            "checkbox_evidence": {
+              "page": 6,
+              "line_text": "\u2610 No",
+              "line_index": 147,
+              "option_text": "No",
+              "boxes": [
+                {
+                  "x0": 454.9,
+                  "x1": 464.86,
+                  "top": 341.77,
+                  "bottom": 351.73,
+                  "state": "unchecked",
+                  "evidence_type": "glyph"
+                }
+              ]
+            }
+          }
+        ],
+        "checkbox_evidence": {
+          "Yes": {
+            "page": 6,
+            "line_text": "Yes",
+            "line_index": 145,
+            "option_text": "Yes",
+            "boxes": [
+              {
+                "x0": 454.9,
+                "x1": 464.86,
+                "top": 319.21,
+                "bottom": 329.17,
+                "state": "unchecked",
+                "evidence_type": "glyph"
+              }
+            ]
+          },
+          "No": {
+            "page": 6,
+            "line_text": "\u2610 No",
+            "line_index": 147,
+            "option_text": "No",
+            "boxes": [
+              {
+                "x0": 454.9,
+                "x1": 464.86,
+                "top": 341.77,
+                "bottom": 351.73,
+                "state": "unchecked",
+                "evidence_type": "glyph"
+              }
+            ]
+          }
+        },
+        "source_section": "1.3.3 Data Migration",
+        "note_label": null,
+        "note_text": null,
+        "extraction_method": "Docling + pdfplumber",
+        "confidence": "low",
+        "flags": [
+          "selected_answer_unclear"
+        ]
+      },
+      {
+        "domain": "yes_no",
+        "question_id": "Q16",
+        "question_text": "Will there be a separate plan and summary for data migration testing?",
+        "selected_answer": null,
+        "branch_options": [
+          {
+            "branch_name": "Yes",
+            "branch_text": "Yes",
+            "selected": false,
+            "checkbox_evidence": {
+              "page": 6,
+              "line_text": "Will there be a separate plan and summary for data migration testing? \u2610 Yes",
+              "line_index": 156,
+              "option_text": "Yes",
+              "boxes": [
+                {
+                  "x0": 454.9,
+                  "x1": 464.86,
+                  "top": 448.95,
+                  "bottom": 458.91,
+                  "state": "unchecked",
+                  "evidence_type": "glyph"
+                }
+              ]
+            }
+          },
+          {
+            "branch_name": "No",
+            "branch_text": "No",
+            "selected": false,
+            "checkbox_evidence": {
+              "page": 6,
+              "line_text": "\u2610 No",
+              "line_index": 157,
+              "option_text": "No",
+              "boxes": [
+                {
+                  "x0": 454.9,
+                  "x1": 464.86,
+                  "top": 468.63,
+                  "bottom": 478.59,
+                  "state": "unchecked",
+                  "evidence_type": "glyph"
+                }
+              ]
+            }
+          }
+        ],
+        "checkbox_evidence": {
+          "Yes": {
+            "page": 6,
+            "line_text": "Will there be a separate plan and summary for data migration testing? \u2610 Yes",
+            "line_index": 156,
+            "option_text": "Yes",
+            "boxes": [
+              {
+                "x0": 454.9,
+                "x1": 464.86,
+                "top": 448.95,
+                "bottom": 458.91,
+                "state": "unchecked",
+                "evidence_type": "glyph"
+              }
+            ]
+          },
+          "No": {
+            "page": 6,
+            "line_text": "\u2610 No",
+            "line_index": 157,
+            "option_text": "No",
+            "boxes": [
+              {
+                "x0": 454.9,
+                "x1": 464.86,
+                "top": 468.63,
+                "bottom": 478.59,
+                "state": "unchecked",
+                "evidence_type": "glyph"
+              }
+            ]
+          }
+        },
+        "source_section": "1.3.3 Data Migration",
+        "note_label": "Additional Notes:",
+        "note_text": null,
+        "extraction_method": "Docling + pdfplumber",
+        "confidence": "low",
+        "flags": [
+          "selected_answer_unclear"
+        ]
+      },
+      {
+        "domain": "yes_no",
+        "question_id": "Q17",
+        "question_text": "Is the traceability of the system being updated or changed as a result of this validation effort?",
+        "selected_answer": null,
+        "branch_options": [
+          {
+            "branch_name": "Yes",
+            "branch_text": "Yes",
+            "selected": false,
+            "checkbox_evidence": {
+              "page": 6,
+              "line_text": "Is the traceability of the system being updated or changed as a result of this \u2610 Yes",
+              "line_index": 160,
+              "option_text": "Yes",
+              "boxes": [
+                {
+                  "x0": 454.9,
+                  "x1": 464.86,
+                  "top": 582.3,
+                  "bottom": 592.26,
+                  "state": "unchecked",
+                  "evidence_type": "glyph"
+                }
+              ]
+            }
+          },
+          {
+            "branch_name": "No",
+            "branch_text": "No",
+            "selected": false,
+            "checkbox_evidence": {
+              "page": 6,
+              "line_text": "\u2610 No",
+              "line_index": 163,
+              "option_text": "No",
+              "boxes": [
+                {
+                  "x0": 454.9,
+                  "x1": 464.86,
+                  "top": 601.98,
+                  "bottom": 611.94,
+                  "state": "unchecked",
+                  "evidence_type": "glyph"
+                }
+              ]
+            }
+          }
+        ],
+        "checkbox_evidence": {
+          "Yes": {
+            "page": 6,
+            "line_text": "Is the traceability of the system being updated or changed as a result of this \u2610 Yes",
+            "line_index": 160,
+            "option_text": "Yes",
+            "boxes": [
+              {
+                "x0": 454.9,
+                "x1": 464.86,
+                "top": 582.3,
+                "bottom": 592.26,
+                "state": "unchecked",
+                "evidence_type": "glyph"
+              }
+            ]
+          },
+          "No": {
+            "page": 6,
+            "line_text": "\u2610 No",
+            "line_index": 163,
+            "option_text": "No",
+            "boxes": [
+              {
+                "x0": 454.9,
+                "x1": 464.86,
+                "top": 601.98,
+                "bottom": 611.94,
+                "state": "unchecked",
+                "evidence_type": "glyph"
+              }
+            ]
+          }
+        },
+        "source_section": "1.3.4 Traceability",
+        "note_label": "Notes:",
+        "note_text": null,
+        "extraction_method": "Docling + pdfplumber",
+        "confidence": "low",
+        "flags": [
+          "selected_answer_unclear"
+        ]
+      }
+    ]
+  }
+}

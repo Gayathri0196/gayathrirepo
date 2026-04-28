@@ -285,6 +285,28 @@ def _normalize_text(s: str) -> str:
     return re.sub(r"\s+", " ", (s or "").strip().lower())
 
 
+def _is_binary_yes_no_question(question_item: str) -> bool:
+    """Return True when a question is genuinely a yes/no style prompt."""
+    q = (question_item or "").strip().lower()
+    if not q:
+        return False
+    return bool(
+        re.match(
+            r"^(will|is|are|was|were|does|do|did|has|have|had|can|could|should|would|shall|may|might)\b",
+            q,
+        )
+    )
+
+
+def _looks_like_bare_yes_no_answer(answer_text: str) -> bool:
+    """Detect unhelpful bare yes/no responses (with optional short punctuation)."""
+    text = (answer_text or "").strip()
+    if not text:
+        return False
+    first_line = text.splitlines()[0].strip().lower()
+    return bool(re.match(r"^(yes|no)(?:[\s\.,;:!\-]|$)", first_line))
+
+
 def _extract_prompt_options(full_question_text: str, question_item: str) -> List[str]:
     """Extract checkbox option labels following a question item in the prompt text."""
     lines = [ln.rstrip() for ln in full_question_text.splitlines()]
@@ -511,6 +533,16 @@ def _deterministic_answer_for_item(question_item: str, docs: list, full_question
     if not lines:
         return None
 
+    # 0) Role ownership questions: answer from explicit responsibilities text.
+    if q.startswith("who") and ("execute" in q or "perform" in q):
+        full = "\n".join(line for _, line in lines)
+        if ("system test" in q or re.search(r"\bst\b", q)) and re.search(
+            r"tester\s+responsible\s+for\s+executing\s+approved\s+test\s+scripts",
+            full,
+            re.IGNORECASE,
+        ):
+            return "Tester role will execute approved test scripts and document results."
+
     # 1) Testing type question: separate activity type from plan structure.
     if "type of testing" in q or ("testing" in q and "validation effort" in q):
         full = "\n".join(line for _, line in lines)
@@ -529,41 +561,42 @@ def _deterministic_answer_for_item(question_item: str, docs: list, full_question
         if selections:
             return "Selected testing context: " + "; ".join(selections)
 
-    # 2) Yes/No style questions: use explicit checked markers or explicit negation lines.
-    # Score lines by relevance; inspect top candidates.
-    ranked = sorted(lines, key=lambda x: _line_overlap_score(question_item, x[1]), reverse=True)
-    top_lines = ranked[:20]
-    relevant_lines = [ln for _, ln in ranked if _line_overlap_score(question_item, ln) >= 0.18][:20]
-    scoped = "\n".join(relevant_lines if relevant_lines else [ln for _, ln in top_lines])
-    joined = "\n".join(line for _, line in top_lines)
+    # 2) Yes/No style questions: only run this branch for genuine binary prompts.
+    if _is_binary_yes_no_question(question_item):
+        # Score lines by relevance; inspect top candidates.
+        ranked = sorted(lines, key=lambda x: _line_overlap_score(question_item, x[1]), reverse=True)
+        top_lines = ranked[:20]
+        relevant_lines = [ln for _, ln in ranked if _line_overlap_score(question_item, ln) >= 0.18][:20]
+        scoped = "\n".join(relevant_lines if relevant_lines else [ln for _, ln in top_lines])
+        joined = "\n".join(line for _, line in top_lines)
 
-    # Question-specific logic first (prevents unrelated yes/no from other lines).
-    if "impacted business units" in q or "uat process" in q:
-        if re.search(r"represent all user areas.*☒\s*yes", scoped, re.IGNORECASE):
-            return "Yes"
-        if re.search(r"impacted business units.*☒\s*yes", scoped, re.IGNORECASE):
-            return "Yes"
-        if re.search(r"impacted business units.*☒\s*no", scoped, re.IGNORECASE):
-            return "No"
-        if re.search(r"business owner", scoped, re.IGNORECASE) and "uat" in scoped.lower():
-            return "Yes"
+        # Question-specific logic first (prevents unrelated yes/no from other lines).
+        if "impacted business units" in q or "uat process" in q:
+            if re.search(r"represent all user areas.*☒\s*yes", scoped, re.IGNORECASE):
+                return "Yes"
+            if re.search(r"impacted business units.*☒\s*yes", scoped, re.IGNORECASE):
+                return "Yes"
+            if re.search(r"impacted business units.*☒\s*no", scoped, re.IGNORECASE):
+                return "No"
+            if re.search(r"business owner", scoped, re.IGNORECASE) and "uat" in scoped.lower():
+                return "Yes"
 
-    yes_no_patterns = [
-        (re.compile(r"☒\s*yes.*☐\s*no", re.IGNORECASE), "Yes"),
-        (re.compile(r"☐\s*yes.*☒\s*no", re.IGNORECASE), "No"),
-    ]
+        yes_no_patterns = [
+            (re.compile(r"☒\s*yes.*☐\s*no", re.IGNORECASE), "Yes"),
+            (re.compile(r"☐\s*yes.*☒\s*no", re.IGNORECASE), "No"),
+        ]
 
-    for pat, value in yes_no_patterns:
-        if pat.search(scoped):
-            return value
+        for pat, value in yes_no_patterns:
+            if pat.search(scoped):
+                return value
 
-    if "separate plan and summary for st" in q or "separate st" in q:
-        if re.search(r"no\s+separate\s+st\s+summary", joined, re.IGNORECASE):
-            return "No"
-        if re.search(r"combined\s+st/?uat\s+summary", joined, re.IGNORECASE):
-            return "No"
-        if re.search(r"yes.*system\s+test\s+plan\s+will\s+be\s+created", joined, re.IGNORECASE):
-            return "Yes"
+        if "separate plan and summary for st" in q or "separate st" in q:
+            if re.search(r"no\s+separate\s+st\s+summary", joined, re.IGNORECASE):
+                return "No"
+            if re.search(r"combined\s+st/?uat\s+summary", joined, re.IGNORECASE):
+                return "No"
+            if re.search(r"yes.*system\s+test\s+plan\s+will\s+be\s+created", joined, re.IGNORECASE):
+                return "Yes"
 
     return None
 
@@ -577,7 +610,22 @@ def _deterministic_answer(question: str, docs: list) -> Optional[str]:
         if resolved is None:
             continue
         resolved_count += 1
-        answers.append(f"{i}. {item} {resolved}")
+
+        # Preserve structured checkbox answers exactly so downstream renderers
+        # can parse ☒/☐ lines reliably.
+        if resolved.lstrip().startswith(("☒", "☐")):
+            if len(items) == 1:
+                answers.append(resolved)
+            else:
+                answers.append(f"{item}\n{resolved}")
+            continue
+
+        # For single-item questions, return the direct resolution without
+        # numbering noise (e.g. "Yes", "No", or a short sentence).
+        if len(items) == 1:
+            answers.append(resolved)
+        else:
+            answers.append(f"{i}. {item} {resolved}")
 
     if resolved_count == 0:
         return None
@@ -631,6 +679,7 @@ def rerank_documents(llm: AzureChatOpenAI, question: str, docs_with_scores: list
 def answer_with_context(llm: AzureChatOpenAI, question: str, docs: list) -> str:
     """
     Generate an answer from an explicit set of retrieved documents using Azure OpenAI.
+    Includes image context (OCR + vision analysis) when available.
 
     This is used after re-ranking so that final generation uses the same
     top documents selected by the ranking step.
@@ -645,6 +694,8 @@ def answer_with_context(llm: AzureChatOpenAI, question: str, docs: list) -> str:
         return deterministic + "\n\nEvidence: " + ", ".join(used_sections)
 
     context_blocks = []
+    image_contexts = []
+    
     for d in docs:
         m = d.metadata
         header = (
@@ -652,10 +703,24 @@ def answer_with_context(llm: AzureChatOpenAI, question: str, docs: list) -> str:
             f"{m.get('section_title', '?')} "
             f"(pages {m.get('page_start', '?')}-{m.get('page_end', '?')})"
         )
+        
+        # Add image context if available
+        if "image_context" in m and m["image_context"]:
+            image_contexts.extend(m["image_context"])
+        
         context_blocks.append(f"{header}\n{d.page_content}")
 
-    # Trim context to reduce token usage when nearing rate limits.
+    # Build context with image information
     full_context = "\n\n".join(context_blocks)
+    
+    # Add image context if found
+    if image_contexts:
+        image_section = "\n\n=== IMAGE & DIAGRAM CONTEXT ===\n"
+        for idx, img_ctx in enumerate(image_contexts, 1):
+            image_section += f"\nImage {idx}: {img_ctx.get('description', 'No description available')}\n"
+        full_context += image_section
+
+    # Trim context to reduce token usage when nearing rate limits.
     max_context_chars = 12000
     if len(full_context) > max_context_chars:
         full_context = full_context[:max_context_chars]
@@ -672,7 +737,10 @@ def answer_with_context(llm: AzureChatOpenAI, question: str, docs: list) -> str:
             temperature=0.0,
             operation="answer_completion",
         )
-        return (response or "").strip()
+        answer = (response or "").strip()
+        if (not _is_binary_yes_no_question(question)) and _looks_like_bare_yes_no_answer(answer):
+            return "I don't know based on the provided documents."
+        return answer
     except RateLimitError:
         logger.warning("Azure OpenAI rate limit reached for final answer; using extractive fallback.")
         return _extractive_fallback_answer(question, docs)

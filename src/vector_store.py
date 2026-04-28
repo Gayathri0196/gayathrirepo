@@ -36,33 +36,58 @@ COLLECTION_NAME = "lms_validation_docs"
 
 def build_vector_store(chunks: list) -> Chroma:
     """
-    Build a Chroma vector store from ingested chunks.
+    Build a Chroma vector store from ingested chunks (text and images).
 
     Each chunk becomes a Document with:
-    - page_content: the section text
-    - metadata: domain, section_id, section_title, source_doc, page_range
+    - page_content: the section text or image analysis
+    - metadata: domain, section_id, section_title, source_doc, page_range, and optional image data
 
     Args:
-        chunks: List of chunk dicts from ingestion.py
+        chunks: List of chunk dicts from ingestion.py (may include image chunks)
 
     Returns:
         Chroma vector store instance (already persisted to disk)
     """
-    logger.info(f"Building vector store with {len(chunks)} chunks...")
+    logger.info(f"Building vector store with {len(chunks)} chunks (including images)...")
 
     # Convert chunks to LangChain Document objects
     documents = []
+    text_count = 0
+    image_count = 0
+    
     for chunk in chunks:
+        # Build base metadata
+        metadata = {
+            "domain": chunk["domain"],
+            "section_id": chunk["section_id"],
+            "section_title": chunk["section_title"],
+            "source_doc": chunk["source_doc"],
+            "page_start": chunk["page_start"],
+            "page_end": chunk["page_end"],
+        }
+        
+        # Add image-specific metadata if present
+        if "image_path" in chunk:
+            metadata["image_path"] = chunk["image_path"]
+            metadata["is_image_chunk"] = True
+            if "image_metadata" in chunk:
+                # Store essential image metadata
+                img_meta = chunk["image_metadata"]
+                metadata["image_page"] = img_meta.get("page_number")
+                metadata["image_index"] = img_meta.get("image_index")
+            image_count += 1
+        else:
+            metadata["is_image_chunk"] = False
+            text_count += 1
+        
+        # Add analysis metadata if present
+        if "analysis_metadata" in chunk:
+            metadata["ocr_confidence"] = chunk["analysis_metadata"].get("ocr_confidence", 0)
+            metadata["has_azure_analysis"] = chunk["analysis_metadata"].get("has_azure_analysis", False)
+        
         doc = Document(
             page_content=chunk["text"],
-            metadata={
-                "domain": chunk["domain"],
-                "section_id": chunk["section_id"],
-                "section_title": chunk["section_title"],
-                "source_doc": chunk["source_doc"],
-                "page_start": chunk["page_start"],
-                "page_end": chunk["page_end"],
-            },
+            metadata=metadata,
         )
         documents.append(doc)
 
@@ -88,7 +113,7 @@ def build_vector_store(chunks: list) -> Chroma:
 
     logger.info(
         f"Vector store built and persisted at '{VECTORDB_DIR}' "
-        f"({len(documents)} documents in collection '{COLLECTION_NAME}')"
+        f"({len(documents)} documents: {text_count} text, {image_count} images)"
     )
     return vectordb
 

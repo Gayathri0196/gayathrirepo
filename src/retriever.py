@@ -7,6 +7,7 @@ Retrieves broader, interlinked context by combining:
   - Reciprocal Rank Fusion (RRF) across rankings
   - MMR diversification
   - Related section linking (neighbors + parents)
+  - Image context enrichment (OCR + vision API results)
 """
 
 import logging
@@ -29,6 +30,7 @@ MMR_K = 6
 MMR_FETCH_K = 20
 NEIGHBOR_HOPS = 1
 RRF_K = 60
+IMAGE_CONTEXT_BOOST = 0.2  # Boost score for image documents
 
 PROCESSED_CHUNKS_JSON = os.path.join("..", "data", "processed_docs", "chunks.json")
 
@@ -365,3 +367,76 @@ def retrieve_with_scores(query: str, threshold: float = SIMILARITY_THRESHOLD, to
         )
 
     return out
+
+
+def enhance_with_image_context(docs_with_scores: list) -> list:
+    """
+    Enhance retrieved documents with related image context.
+
+    Finds image chunks on the same page and adds their descriptions
+    to provide visual context for the answer.
+
+    Args:
+        docs_with_scores: List of (Document, score) tuples from retrieve_with_scores
+
+    Returns:
+        Enhanced list with image context added to metadata
+    """
+    if not docs_with_scores:
+        return docs_with_scores
+
+    vectordb = load_vector_store()
+    enhanced = []
+    pages_to_images = {}  # Cache page -> images mapping
+
+    for doc, score in docs_with_scores:
+        page_start = doc.metadata.get("page_start", 0)
+        page_end = doc.metadata.get("page_end", 0)
+        is_image = doc.metadata.get("is_image_chunk", False)
+
+        # Skip if this is already an image chunk
+        if is_image:
+            enhanced.append((doc, score))
+            continue
+
+        # Find related images on the same pages
+        image_context = []
+        for page in range(page_start, page_end + 1):
+            if page in pages_to_images:
+                image_context.extend(pages_to_images[page])
+            else:
+                # Query for image chunks on this page
+                try:
+                    query = f"image diagram chart table page {page}"
+                    image_results = vectordb.similarity_search_with_relevance_scores(
+                        query, k=3
+                    )
+                    
+                    page_images = []
+                    for img_doc, img_score in image_results:
+                        if (
+                            img_doc.metadata.get("is_image_chunk", False)
+                            and img_doc.metadata.get("image_page") == page
+                        ):
+                            page_images.append({
+                                "description": img_doc.page_content[:200],
+                                "score": img_score,
+                            })
+                    
+                    pages_to_images[page] = page_images
+                    image_context.extend(page_images)
+                except Exception as e:
+                    logger.debug(f"Error finding image context for page {page}: {e}")
+
+        # Add image context to document metadata
+        if image_context:
+            doc.metadata["image_context"] = image_context
+            # Slightly boost score if image context is found
+            score = min(1.0, score + IMAGE_CONTEXT_BOOST)
+            logger.info(
+                f"Enhanced document with {len(image_context)} image contexts on pages {page_start}-{page_end}"
+            )
+
+        enhanced.append((doc, score))
+
+    return enhanced
